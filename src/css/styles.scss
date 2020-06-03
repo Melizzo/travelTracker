@@ -1,0 +1,13 @@
+$primary-background: grey;
+$primary-font-family: 'Barlow Condensed', sans-serif;
+
+
+@mixin flex-container($justify-content) {
+  display: flex;
+  justify-content: $justify-content;
+}
+
+@mixin height-and-width($height, $width){
+  height: $height;
+  width: $width;
+}
