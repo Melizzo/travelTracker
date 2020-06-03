@@ -2,8 +2,9 @@ class ApiFetch{
   constructor() {
     this.rootURL = "https://fe-apps.herokuapp.com/api/v1/travel-tracker/data"
   }
+
   getTravelersData() {
-    let url = `${this.rootUrl}/travelers/travelers`
+    let url = `https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers`
     return fetch(url).then(response => response.json())
   }
 
