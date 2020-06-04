@@ -79,7 +79,7 @@ describe('TravelAgency', function() {
   });
 
   it('should be able to find a total of how many travelers on currently on a trip', function() {
-    expect(travelAgent.findTotalNumTravelersCurrentlyOnATrip(date)).to.equal()
+    expect(travelAgent.findTotalNumTravelersCurrentlyOnATrip('2020/06/04')).to.equal(2)
   });
 
 })

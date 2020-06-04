@@ -36,7 +36,11 @@ class TravelAgency extends Traveler {
   }
 
   findTotalNumTravelersCurrentlyOnATrip(date) {
-
+    const travelers = this.tripsData.reduce((totalTravelers, trip) => {
+      trip.date === date ? totalTravelers.push(trip) : null
+      return totalTravelers
+    }, [])
+    return travelers.length
   }
 
 

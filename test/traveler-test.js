@@ -57,7 +57,7 @@ let traveler;
       "userID": 1,
       "destinationID": 4,
       "travelers": 2,
-      "date": "2020/02/25",
+      "date": "2020/06/04",
       "duration": 10,
       "status": "approved",
       "suggestedActivities": []
@@ -67,7 +67,7 @@ let traveler;
       "userID": 1,
       "destinationID": 5,
       "travelers": 1,
-      "date": "2019/09/16",
+      "date": "2020/06/04",
       "duration": 8,
       "status": "approved",
       "suggestedActivities": []
