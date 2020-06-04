@@ -8,7 +8,7 @@ import ApiFetch from './apiFetch';
 // import Traveler from '.traveler';
 import './images/loginPageTravel.jpg'
 
-let user;
+let traveler;
 
 // Data Fetching
 
@@ -21,12 +21,13 @@ let user;
 
 function fetchSingleUser(id) {
   const promise = ApiFetch.getSingleTravelerData(id)
-  .then(data => instantiateSingleUser(data))
-  .then(console.log(data))
+  .then(data => instantiateSingleTraveler(data))
+  .then(data => console.log(data))
+  // .then(console.log(ApiFetch.getSingleTravelerData(id)))
   .catch(error => console.log(error))
 }
 
-function instantiateSingleUser(data) {
+function instantiateSingleTraveler(data) {
   // user = new User(data)
 }
 
