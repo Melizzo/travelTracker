@@ -18,8 +18,36 @@ class Traveler {
     }, [])
   }
 
-  calculateTotalCostSingleTravelerTrips() {
+  calculateTotalLodgingCostPerTrip() {
+    const travelerTrips = this.findTravelerTrips()
+    return travelerTrips.reduce((totalLodging, trip) => {
+      this.destinationsData.forEach(destination => {
+        if(trip.destinationID === destination.id) {
+          totalLodging += trip.duration * destination.estimatedLodgingCostPerDay
+        } 
+      })
+      return totalLodging
+    }, 0)
+  }
 
+  calculateTotalFlightCostPerTrip() {
+    const travelerTrips = this.findTravelerTrips()
+    return travelerTrips.reduce((totalFlightCost, trip) => {
+      this.destinationsData.forEach(destination =>{
+        if(trip.destinationID === destination.id) {
+          totalFlightCost += trip.travelers * destination.estimatedFlightCostPerPerson
+        }
+      })
+      return totalFlightCost
+    }, 0)
+  }
+
+  calculateTotalCostOfTrips() {
+    return (this.calculateTotalLodgingCostPerTrip() + this.calculateTotalFlightCostPerTrip())
+  }
+
+  calculateTravelAgency10PercentFee() {
+    return (0.10 * this.calculateTotalCostOfTrips() )
   }
 
 }

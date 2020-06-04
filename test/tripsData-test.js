@@ -1,7 +1,7 @@
 let tripsData = [{
     "id": 1,
     "userID": 2,
-    "destinationID": 49,
+    "destinationID": 1,
     "travelers": 1,
     "date": "2019/09/16",
     "duration": 8,
@@ -11,7 +11,7 @@ let tripsData = [{
     {
     "id": 2,
     "userID": 3,
-    "destinationID": 25,
+    "destinationID": 2,
     "travelers": 5,
     "date": "2020/10/04",
     "duration": 18,
@@ -21,7 +21,7 @@ let tripsData = [{
     {
     "id": 3,
     "userID": 2,
-    "destinationID": 22,
+    "destinationID": 3,
     "travelers": 4,
     "date": "2020/05/22",
     "duration": 17,
@@ -31,7 +31,7 @@ let tripsData = [{
     {
     "id": 4,
     "userID": 1,
-    "destinationID": 14,
+    "destinationID": 4,
     "travelers": 2,
     "date": "2020/02/25",
     "duration": 10,
@@ -41,7 +41,7 @@ let tripsData = [{
     {
     "id": 1,
     "userID": 1,
-    "destinationID": 49,
+    "destinationID": 5,
     "travelers": 1,
     "date": "2019/09/16",
     "duration": 8,
