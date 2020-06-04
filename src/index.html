@@ -11,12 +11,14 @@
       <h1>Minimalist Travel</h1>
     </header>
     <main>
-      <section class="login-area">
+      <section id ="welcome-login-area" class="login-area">
         <span id="login-error" class="login-error-in-message"></span>
-        <input id="login-username-input" class="username-input" aria-label="enter-username" type="text" required>Login</input>
-        <input id="login-password-input" class="password-input" aria-label="enter-password" type="text" required>Password</input>
-        <input id="login-submit-button" aria-label="submit-username-and-password" type="submit" value="Submit"></input>
+        <input id="login-username-input" class="username-input" value="traveler3" aria-label="enter-username" type="text" required>Login</input>
+        <input id="login-password-input"  class="password-input" value="travel2020" aria-label="enter-password" type="text" required>Password</input>
+        <button id="login-submit-button" aria-label="submit-username-and-password" type="submit">Submit</button>
       </section>
+      <section id="traveler-page" class="hidden"></section>
+      <section id="travel-agency-page" class="hidden"></section>
     </main>
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->

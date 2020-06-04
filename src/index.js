@@ -5,40 +5,94 @@
 import './css/base.scss';
 import "./css/styles.scss";
 import ApiFetch from './apiFetch';
+// import Traveler from '.traveler';
 import './images/loginPageTravel.jpg'
 
-
-let api = new ApiFetch();
+let user;
 
 // Data Fetching
 
-const fetchData = () => {
-  const travelersData = api.getTravelersData();
-  // const singleTravelerData = api.getSingleTravelerData(id)
-  const tripsData = api.getAllTrips();
-  const destinationsData = api.getAllDestinations();
-  
-  Promise.all([travelersData, tripsData, destinationsData])
-    .then(dataSet => dataSet = {
-      travelersData: dataSet[0].travelersData,
-      // singleTravelerData: dataSet[1].singleTravelerData,
-      tripsData: dataSet[1].tripsData,
-      destinationsData: dataSet[2].destinationsData, 
-    }).then(dataSet => {
-      console.log(travelersData);
-      
-      // generateUser(dataSet.singleTravelerData, dataSet.tripsData);
-      // createCards(dataSet.recipeData);
-      // findTags(dataSet.recipeData);
-    })
-    .catch(error => console.log(error.message))
+
+// This will fetch when user has clicked submit  
+// on submit - will pass in the num portion of the login into the fetch,
+// and if it is success, check password.
+// if unsuccessful, display error. 
+// error => run function displayError (span.innerHTML `you dummy, that's not right`)
+
+function fetchSingleUser(id) {
+  const promise = ApiFetch.getSingleTravelerData(id)
+  .then(data => instantiateSingleUser(data))
+  .then(console.log(data))
+  .catch(error => console.log(error))
 }
 
-fetchData()
-
-// On click of submit, instante the all the data.  
-// Find the traveler/travelAgency
-// 
+function instantiateSingleUser(data) {
+  // user = new User(data)
+}
 
 
-console.log('This is the JavaScript entry file - your code begins here.');
+
+// function fetchData() {
+//   Promise.all([ApiFetch.travelersData, ApiFetch.getSingleTravelerData(id), ApiFetch.tripsData, ApiFetch.destinationsData])
+//     .then(data => instantiate(data[0].travelersData, data[1].getSingleTravelerData(id), data[2].tripsData, data[3].destinationsData))
+//     .catch(error => console.log(error.message))
+// }
+
+// function instantiate(travelers, singleTraveler, trips, destinations) {
+
+// }
+// QuerySelectors
+const submitButton = document.querySelector('#login-submit-button');
+const loginPageError = document.querySelector('#login-error')
+
+
+// Event Listeners
+submitButton.addEventListener('click', logIn);
+
+function logIn(e) {
+  console.log(e);
+  // validatePassword();
+  // returnUserName()
+  validateLoginInformation();
+  
+  // Validate that the password === travel2020, if not throw alert
+  // if the password does validate
+  // slice traveler off of the string, Number - the remain value
+  // interpolate that in the single user fetch.
+  // if success - great
+  // if fail interHTML fetch Error
+  // validateLoginInformation(login, password);
+  
+} 
+
+function validateLoginInformation() {
+  if(!returnUserName) {
+    loginPageError.insertAdjacentHTML('beforebegin', "<p>That's an incorrect login!</p>")
+  }
+  if(!validatePassword()) {
+    loginPageError.insertAdjacentHTML('beforebegin', "<p>That's an incorrect Password!</p>")
+  } 
+  else {
+    returnUserName()
+  }
+}
+ 
+function returnUserName() {
+  const travelerId = Number(document.querySelector('#login-username-input').value.split('').splice(8).join())
+  fetchSingleUser(travelerId)
+  if(document.querySelector('#login-username-input').value === 'manager') {
+    return true
+  }
+
+  // const findMatch = data.travelersData.find(traveler => traveler.id === inputLogin[0].value);
+  // inputLogin[0].value !== 'manager' && findMatch === undefined ? findMatch = '' : findMatch;
+  // return usernameInput[0].value === 'manager' || findMatch.username;
+
+}
+
+function validatePassword() {
+  const password = document.querySelector('#login-password-input').value
+ if(password !== 'travel2020' || ''){
+    return false;
+  } return true;
+}
