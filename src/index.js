@@ -8,7 +8,7 @@ import ApiFetch from './apiFetch';
 // import Traveler from '.traveler';
 import './images/loginPageTravel.jpg'
 
-let user;
+let traveler;
 
 // Data Fetching
 
@@ -20,14 +20,18 @@ let user;
 // error => run function displayError (span.innerHTML `you dummy, that's not right`)
 
 function fetchSingleUser(id) {
-  const promise = ApiFetch.getSingleTravelerData(id)
-  .then(data => instantiateSingleUser(data))
-  .then(console.log(data))
+  Promise.all([ApiFetch.getSingleTravelerData(id), ApiFetch.tripsData, ApiFetch.getAllDestinations])
+  .then(data => instantiateSingleTraveler(data[0].getSingleTravelerData, data[1].tripsData, data[2].getAllDestinations))
+
+  // const promise = ApiFetch.getSingleTravelerData(id)
+  // .then(data => instantiateSingleTraveler(data))
+  // .then(data => console.log(data))
+  // .then(console.log(ApiFetch.getSingleTravelerData(id)))
   .catch(error => console.log(error))
 }
 
-function instantiateSingleUser(data) {
-  // user = new User(data)
+function instantiateSingleTraveler(traveler, tripsData, destinationsData) {
+  traveler = new Traveler(traveler, tripsData, destinationsData)
 }
 
 
@@ -50,7 +54,7 @@ const loginPageError = document.querySelector('#login-error')
 submitButton.addEventListener('click', logIn);
 
 function logIn(e) {
-  console.log(e);
+  console.log('submit Btn', e);
   // validatePassword();
   // returnUserName()
   validateLoginInformation();
