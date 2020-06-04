@@ -9,7 +9,36 @@ class TravelAgency extends Traveler {
     return data instanceof Array ? data : "Error, data for all the traveler\'s cannot be found."
   }
 
-  
+  calculateTotalLodgingCost() {
+    return this.tripsData.reduce((totalLodging, trip) => {
+      this.destinationsData.forEach(destination => {
+        if(trip.destinationID === destination.id) {
+          totalLodging += trip.duration * destination.estimatedLodgingCostPerDay
+        } 
+      })
+      return totalLodging
+    }, 0)
+  }
+
+  calculateTotalFlightsCost() {
+    return this.tripsData.reduce((totalFlights, trip) => {
+      this.destinationsData.forEach(destination => {
+        if(trip.destinationID === destination.id) {
+          totalFlights += trip.duration * destination.estimatedFlightCostPerPerson
+        } 
+      })
+      return totalFlights
+    }, 0)
+  }
+
+  findPendingTrips() {
+    return this.tripsData.filter(trip => trip.status === 'pending');
+  }
+
+  findTotalNumTravelersCurrentlyOnATrip(date) {
+
+  }
+
 
 }
 
