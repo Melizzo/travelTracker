@@ -1,25 +1,26 @@
 class Traveler {
-  constructor(travelerData, tripsData) {
+  constructor(travelerData, tripsData, destinationsData) {
     this.travelerData = this.checkIfDataIsArray(travelerData)
     this.tripsData = this.checkIfDataIsArray(tripsData)
+    this.destinationsData = this.checkIfDataIsArray(destinationsData)
   }
 
   checkIfDataIsArray(data) {
-    return data instanceof Array ? data : "Error, data for traveler\'s cannot be found."
+    return data instanceof Array ? data : "Error, data for traveler\'s data cannot be found."
   }
 
-  // findUser(id) {
-  //   return id === Number(id) ? this.userData.find((user) => user.id === id) : `Sorry, '${id}' is not a user id.`
-  // }
-  
   findTravelerTrips() {
-
+    return this.tripsData.reduce((travelerTrips, trip) => {
+     this.travelerData.forEach(traveler => {
+       trip.userID === traveler.id ? travelerTrips.push(trip) : null
+     })
+     return travelerTrips
+    }, [])
   }
 
-  
+  calculateTotalCostSingleTravelerTrips() {
 
-
-  
+  }
 
 }
 
