@@ -84,11 +84,11 @@ let traveler;
   })
 
   it('should be able to total the cost of all the travel\'s trip', function() {
-    expect(traveler.calculateTotalCostOfTrips()).to.equal(3200)
+    expect(traveler.calculateTotalCostOfTrips(1850, 1350)).to.equal(3200)
   })
 
   it('should be able to show the 10% Travel Agency fees', function() {
-    expect(traveler.calculateTravelAgency10PercentFee(traveler.calculateTotalCostOfTrips())).to.equal(320)
+    expect(traveler.calculateTravelAgency10PercentFee(3200)).to.equal(320)
   })
 
 
