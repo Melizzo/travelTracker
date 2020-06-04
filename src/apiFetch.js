@@ -1,68 +1,64 @@
-class ApiFetch{
-  constructor() {
-    this.rootURL = "https://fe-apps.herokuapp.com/api/v1/travel-tracker/data"
-  }
-
+let ApiFetch = {
   getTravelersData() {
-    let url = `https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers`
-    return fetch(url).then(response => response.json())
-  }
+    return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers`)
+    .then(response => response.json())
+  },
 
   getSingleTravelerData(id) {
-    let url = `${this.rootUrl}/travelers/travelers/${id}`
-    return fetch(url).then(response => response.json())
-  }
+    return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/${id}`)
+    .then(response => response.json())
+  },
 
   getAllTrips() {
-    let url = `${this.rootUrl}/trips/trips`
-    return fetch(url).then(response => response.json())
-  }
+    return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips`)
+    .then(response => response.json())
+  },
 
   getAllDestinations() {
-    let url = `${this.rootUrl}/destinations/destinations`
-    return fetch(url).then(response => response.json())
-  }
+    return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/destinations/destinations`)
+   .then(response => response.json())
+  },
 
   postNewTrip(TOBEDETERMINEDOBJECT) {
-    let url = `${this.rootUrl}/trips/trips`;
-    return fetch(url, {
+    return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(TOBEDETERMINEDOBJECT),
-      // {id: <number>, 
-      // userID: <number>, 
-      // destinationID: <number>, 
-      // travelers: <number>, 
-      // date: <string 'YYYY/MM/DD'>, 
-      // duration: <number>, 
-      // status: <string 'approved' or 'pending'>, 
-      // suggestedActivities: <array of strings>}
-    })
+        body: JSON.stringify(TOBEDETERMINEDOBJECT) ({
+        // {id: <number>, 
+        // userID: <number>, 
+        // destinationID: <number>, 
+        // travelers: <number>, 
+        // date: <string 'YYYY/MM/DD'>, 
+        // duration: <number>, 
+        // status: <string 'approved' or 'pending'>, 
+        // suggestedActivities: <array of strings>}
+      })
       .then(response => console.log(response.json()))
-      .catch(err => console.log(err.message));
-  }
+      .catch(err => console.log(err.message))
+    })
+  },
 
-  modifySingleTrip(TOBEDETERMINEDOBJECT) {
-    let url = `${this.rootUrl}/trips/updateTrip`;
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(TOBEDETERMINEDOBJECT),
-      // {id: <number>, 
-      // status:<String of 'approved' or 'pending', 
-      // suggestedActivities: <Array of strings>} 
-      // Only a status or a suggestedActivities property is required for a successful request
-    })
-      .then(response => console.log(response.json()))
-      .catch(err => console.log(err.message));
-  }
+  // modifySingleTrip(TOBEDETERMINEDOBJECT) {
+  //   return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/updateTrip`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(TOBE DETERMINEDOBJECT, {
+  //     // {id: <number>, 
+  //     // status:<String of 'approved' or 'pending', 
+  //     // suggestedActivities: <Array of strings>} 
+  //     // Only a status or a suggestedActivities property is required for a successful request
+  //     })
+  //   })
+  //     .then(response => console.log(response.json()))
+  //     .catch(err => console.log(err.message))
+  // },
 
   deleteSingleTrip(TOBEDETERMINEDOBJECT) {
-    let url = `${this.rootUrl}/trips/trips`;
+    let url = `https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips`;
     return fetch(url, {
       method: 'DELETE',
       headers: {
