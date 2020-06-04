@@ -42,12 +42,12 @@ class Traveler {
     }, 0)
   }
 
-  calculateTotalCostOfTrips() {
+  calculateTotalCostOfTrips(num1, num2) {
     return (this.calculateTotalLodgingCostPerTrip() + this.calculateTotalFlightCostPerTrip())
   }
 
-  calculateTravelAgency10PercentFee() {
-    return (0.10 * this.calculateTotalCostOfTrips() )
+  calculateTravelAgency10PercentFee(num) {
+    return (0.10 * num)
   }
 
 }

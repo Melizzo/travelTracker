@@ -27,8 +27,13 @@ let traveler;
   });
 
   it('should return an error message if there is no trips data', function() {
-    traveler = new Traveler()
+    traveler = new Traveler(travelerData)
     expect(traveler.tripsData).to.equal('Error, data for traveler\'s data cannot be found.')
+  });
+
+  it('should return an error message if there is no destinations data', function() {
+    traveler = new Traveler(travelerData, tripsData)
+    expect(traveler.destinationsData).to.equal('Error, data for traveler\'s data cannot be found.')
   });
 
   it('should have a method that determines whether data passed in is an array', function() {
@@ -36,11 +41,13 @@ let traveler;
     expect(traveler.checkIfDataIsArray('horse')).to.equal('Error, data for traveler\'s data cannot be found.')
     expect(traveler.travelerData).to.equal('Error, data for traveler\'s data cannot be found.')
 
-    const traveler2 = new Traveler(travelerData, tripsData)
+    const traveler2 = new Traveler(travelerData, tripsData, destinationData)
     expect(traveler2.checkIfDataIsArray(travelerData)).to.equal(travelerData)
     expect(traveler2.checkIfDataIsArray(tripsData)).to.equal(tripsData)
+    expect(traveler2.checkIfDataIsArray(destinationData)).to.equal(destinationData)
     expect(traveler2.travelerData).to.deep.equal(travelerData)
     expect(traveler2.tripsData).to.deep.equal(tripsData)
+    expect(traveler2.destinationsData).to.deep.equal(destinationData)
   });
 
   it('should be able to find a traveler\'s trips', function() {
@@ -81,8 +88,8 @@ let traveler;
   })
 
   it('should be able to show the 10% Travel Agency fees', function() {
-    expect(traveler.calculateTravelAgency10PercentFee()).to.equal(320)
+    expect(traveler.calculateTravelAgency10PercentFee(traveler.calculateTotalCostOfTrips())).to.equal(320)
   })
 
-  
+
 })
