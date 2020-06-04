@@ -43,7 +43,7 @@ class Traveler {
   }
 
   calculateTotalCostOfTrips(num1, num2) {
-    return (this.calculateTotalLodgingCostPerTrip() + this.calculateTotalFlightCostPerTrip())
+    return num1 + num2
   }
 
   calculateTravelAgency10PercentFee(num) {
