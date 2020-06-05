@@ -82,4 +82,8 @@ describe('TravelAgency', function() {
     expect(travelAgent.findTotalNumTravelersCurrentlyOnATrip('2020/06/04')).to.equal(2)
   });
 
+  it('should be able to search for a traveler by name', function() {
+    expect(travelAgent.searchTravelersByName()).to.deep.equal([])
+  })
+
 })

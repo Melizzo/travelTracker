@@ -41,6 +41,18 @@ class TravelAgency extends Traveler {
     return travelers.length
   }
 
+  searchTravelersByName() {
+      const travelerInformation = this.travelersData.map(traveler => {
+        tripsData.find(trip => {
+          if (traveler.id === trip.id) {
+            traveler['name'] = trip.name
+          }
+        })
+        return traveler
+      })
+      return travelerInformation
+    } 
+  }
 }
 
 export default TravelAgency;
