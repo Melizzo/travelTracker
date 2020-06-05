@@ -41,7 +41,6 @@ class TravelAgency extends Traveler {
     return travelers.length
   }
 
-
 }
 
 export default TravelAgency;
