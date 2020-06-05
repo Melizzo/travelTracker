@@ -2,11 +2,18 @@ let ApiFetch = {
   getTravelersData() {
     return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers`)
     .then(response => response.json())
+    .catch(err => {throw err})
   },
 
   getSingleTravelerData(id) {
     return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/${id}`)
-    .then(response => response.json())
+    .then(response => {
+      if(!response.ok) {
+        throw response.message
+      }
+      return response.json()})
+    // Add in !ok in the response above, before the return
+    .catch(err => {console.log(err);})
   },
 
   getAllTrips() {
