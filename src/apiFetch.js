@@ -7,7 +7,11 @@ let ApiFetch = {
 
   getSingleTravelerData(id) {
     return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/${id}`)
-    .then(response => {return response.json()})
+    .then(response => {
+      if(!response.ok) {
+        throw response.message
+      }
+      return response.json()})
     // Add in !ok in the response above, before the return
     .catch(err => {console.log(err);})
   },
