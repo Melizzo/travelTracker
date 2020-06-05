@@ -5,33 +5,41 @@
 import './css/base.scss';
 import "./css/styles.scss";
 import ApiFetch from './apiFetch';
-// import Traveler from '.traveler';
+import Traveler from './traveler';
+import TravelAgency from './travelAgency';
 import './images/loginPageTravel.jpg'
 
 let traveler;
 
+// QuerySelectors
+const submitButton = document.querySelector('#login-submit-button');
+const loginPageError = document.querySelector('#login-error');
+
 // Data Fetching
 
-
-// This will fetch when user has clicked submit  
-// on submit - will pass in the num portion of the login into the fetch,
-// and if it is success, check password.
-// if unsuccessful, display error. 
-// error => run function displayError (span.innerHTML `you dummy, that's not right`)
-
 function fetchSingleUser(id) {
-  Promise.all([ApiFetch.getSingleTravelerData(id), ApiFetch.tripsData, ApiFetch.getAllDestinations])
-  .then(data => instantiateSingleTraveler(data[0].getSingleTravelerData, data[1].tripsData, data[2].getAllDestinations))
+  Promise.all([ApiFetch.getSingleTravelerData(id), ApiFetch.getAllTrips(), ApiFetch.getAllDestinations()])
+  .then(data => instantiateSingleTraveler(data[0].getSingleTravelerData, data[1].trips, data[2].destinations))
+  .catch(error => {
+    loginPageError.insertAdjacentHTML('afterbegin', "<p>Login doesn't exist, please try again.</p>");
+    console.log(error);
+  })
+}
 
-  // const promise = ApiFetch.getSingleTravelerData(id)
-  // .then(data => instantiateSingleTraveler(data))
-  // .then(data => console.log(data))
-  // .then(console.log(ApiFetch.getSingleTravelerData(id)))
+function fetchAllTravelers() {
+  Promise.all([ApiFetch.getAllTrips(), ApiFetch.getAllDestinations(), ApiFetch.getTravelersData()])
+  .then(data => instantiateTravelAgency(data[0].trips, data[1].destinations, data[2].travelers))
   .catch(error => console.log(error))
 }
 
 function instantiateSingleTraveler(traveler, tripsData, destinationsData) {
+  console.log('hello')
   traveler = new Traveler(traveler, tripsData, destinationsData)
+}
+
+// pass in empty Object when calling the travel agency, before tripsData(it's expecting a singleTravelerData)
+function instantiateTravelAgency(tripsData, destinationsData, travelersData) {
+  travelAgent = new TravelAgency(tripsData, destinationsData, travelersData)
 }
 
 
@@ -45,9 +53,7 @@ function instantiateSingleTraveler(traveler, tripsData, destinationsData) {
 // function instantiate(travelers, singleTraveler, trips, destinations) {
 
 // }
-// QuerySelectors
-const submitButton = document.querySelector('#login-submit-button');
-const loginPageError = document.querySelector('#login-error')
+
 
 
 // Event Listeners

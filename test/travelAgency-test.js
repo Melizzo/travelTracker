@@ -25,13 +25,13 @@ describe('TravelAgency', function() {
 
   it('should return an error message if there is no traveler data', function() {
     travelAgent = new TravelAgency()
-    expect(travelAgent.travelersData).to.equal('Error, data for all the traveler\'s cannot be found.')
+    expect(travelAgent.travelersData).to.equal('Error, data for traveler\'s data cannot be found.')
   }); 
 
   it('should have a method that determines whether data passed in is an array', function() {
     travelAgent = new TravelAgency('horse')
-    expect(travelAgent.checkIfDataIsArray('horse')).to.equal('Error, data for all the traveler\'s cannot be found.')
-    expect(travelAgent.travelerData).to.equal('Error, data for all the traveler\'s cannot be found.')
+    expect(travelAgent.checkIfDataIsArray('horse')).to.equal('Error, data for traveler\'s data cannot be found.')
+    expect(travelAgent.travelerData).to.equal('Error, data for traveler\'s data cannot be found.')
 
     const travelAgent2 = new TravelAgency(travelerData, tripsData, destinationsData, travelersData)
     expect(travelAgent2.checkIfDataIsArray(travelersData)).to.equal(travelersData)
