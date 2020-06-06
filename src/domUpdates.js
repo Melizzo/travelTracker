@@ -14,11 +14,11 @@ let DomUpdates = {
   displayPage() {
     if(document.querySelector('#login-username-input').value === 'manager') {
       welcomePage.classList.add('hidden')
+      welcomePage.classList.remove('login-area')
       travelAgencyPage.classList.remove('hidden')
-      console.log('travel agent Page');
-      
     } else {
       welcomePage.classList.add('hidden')
+      welcomePage.classList.remove('login-area')
       travelerPage.classList.remove('hidden')
       console.log('traveler Page')
     }
