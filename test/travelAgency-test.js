@@ -31,7 +31,7 @@ describe('TravelAgency', function() {
   it('should have a method that determines whether data passed in is an array', function() {
     travelAgent = new TravelAgency('horse')
     expect(travelAgent.checkIfDataIsArray('horse')).to.equal('Error, data for traveler\'s data cannot be found.')
-    expect(travelAgent.travelerData).to.equal('Error, data for traveler\'s data cannot be found.')
+    expect(travelAgent.travelersData).to.equal('Error, data for traveler\'s data cannot be found.')
 
     const travelAgent2 = new TravelAgency(travelerData, tripsData, destinationsData, travelersData)
     expect(travelAgent2.checkIfDataIsArray(travelersData)).to.equal(travelersData)
@@ -39,11 +39,11 @@ describe('TravelAgency', function() {
   });
 
   it('should have a method to find the total cost of lodging for all travelers', function() {
-    expect(travelAgent.calculateTotalLodgingCost()).to.equal(6420)
+    expect(travelAgent.calculateTotalLodgingCost()).to.equal(7620)
   });
 
   it('should have a method to find the total cost of flights for all travelers', function() {
-    expect(travelAgent.calculateTotalFlightsCost()).to.equal(42090)
+    expect(travelAgent.calculateTotalFlightsCost()).to.equal(47290)
   });
 
   it('should have a method to find the total cost of every trip', function() {
@@ -79,7 +79,20 @@ describe('TravelAgency', function() {
   });
 
   it('should be able to find a total of how many travelers on currently on a trip', function() {
-    expect(travelAgent.findTotalNumTravelersCurrentlyOnATrip('2020/06/04')).to.equal(2)
+    expect(travelAgent.findTotalNumTravelersCurrentlyOnATrip()).to.equal('There are no current traveler\'s')
   });
+
+  it('should be able abe to find a traveler by name', function() {
+    expect(travelAgent.findSingleTraveler('Tiffy')).to.deep.equal({ 
+      id: 5, 
+      name: 'Tiffy Grout', 
+      travelerType: 'thrill-seeker' 
+    })
+  });
+
+  // it('should be able able to find a traveler', function() {
+  //   console.log(travelAgent.searchTravelers('Tiffy'));
+  //   expect(travelAgent.searchTravelers('Tiffy')).to.equal([])
+  // });
 
 })

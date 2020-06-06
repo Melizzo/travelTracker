@@ -1,7 +1,11 @@
 let ApiFetch = {
   getTravelersData() {
     return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers`)
-    .then(response => response.json())
+    .then(response => {
+      if(!response.ok) {
+        throw response.message
+      }
+      return response.json()})
     .catch(err => {throw err})
   },
 
@@ -12,8 +16,7 @@ let ApiFetch = {
         throw response.message
       }
       return response.json()})
-    // Add in !ok in the response above, before the return
-    .catch(err => {console.log(err);})
+    .catch(err => {throw err})
   },
 
   getAllTrips() {
@@ -42,8 +45,12 @@ let ApiFetch = {
         // status: <string 'approved' or 'pending'>, 
         // suggestedActivities: <array of strings>}
       })
-      .then(response => console.log(response.json()))
-      .catch(err => console.log(err.message))
+      .then(response => {
+        if(!response.ok) {
+          throw response.message
+        }
+        return response.json()})
+      .catch(err => {throw err})
     })
   },
 
