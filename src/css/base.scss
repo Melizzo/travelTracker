@@ -61,6 +61,7 @@ main {
   margin: 2em;
   background-color: rgba(50, 46, 46, 0.906);
   overflow: scroll;
+    
     // input {
     //   @include height-and-width(10%, 100%);
     //   border-bottom: 1px solid gray;
@@ -88,4 +89,8 @@ main {
     // }
     // display: none;
   // }
+}
+
+.display-traveler-trips {
+  overflow: scroll;
 }

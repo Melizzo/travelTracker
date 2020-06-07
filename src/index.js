@@ -69,13 +69,14 @@ const loginPageError = document.querySelector("#login-error");
 submitButton.addEventListener("click", logIn);
 
 function travelerPageHandler() {
-  console.log("handler traveler", traveler);
   traveler.findTravelerFirstName();
-  traveler.findTravelerTrips();
+  traveler.findTravelerTrips()
+  // const trythis = traveler.findTravelerTrips();
+  traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips());
+  traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
 }
 
 function logIn(e) {
-  console.log("submit Btn", e);
   const loginValid = validateLoginInformation();
   if (loginValid) {
     findUserName();
@@ -102,8 +103,6 @@ function findUserName() {
       .value.split("")
       .filter((char) => !isNaN(char + 1))
       .join("");
-    console.log(travelerId);
-
     fetchSingleUser(travelerId);
   }
 }

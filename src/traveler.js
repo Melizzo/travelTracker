@@ -18,23 +18,20 @@ class Traveler {
 
   findTravelerFirstName(){
     const firstName = this.travelerData.name.split(' ')[0]
-    console.log('firstName', this.travelerData);
-    console.log('domUpdates', domUpdates);
     domUpdates.displayTravelerWelcome(firstName)
   }
 
   findTravelerTrips() {
-    const travelerSingleTravelerTrips = this.tripsData.reduce((travelerTrips, trip) => {
-     this.travelerData.forEach(traveler => {
-       trip.userID === traveler.id ? travelerTrips.push(trip) : null
-     })
+    const SingleTravelerTrips = this.tripsData.reduce((travelerTrips, trip) => {
+       trip.userID === this.travelerData.id ? travelerTrips.push(trip) : null
      return travelerTrips
     }, [])
-    domUpdates.displayTravelerTrips(travelerSingleTravelerTrips)
+    domUpdates.displayTravelerTrips(SingleTravelerTrips, this.destinationsData)
+    return SingleTravelerTrips
   }
 
   calculateTotalLodgingCostPerTripThisYear(array) {
-    return array.reduce((totalLodging, trip) => {
+    const singleTravelerLodgingCost = array.reduce((totalLodging, trip) => {
       this.destinationsData.forEach(destination => {
         if(trip.destinationID === destination.id && Number(trip.date.split('/')[0]) > 2019) {
           totalLodging += trip.duration * destination.estimatedLodgingCostPerDay
@@ -42,10 +39,12 @@ class Traveler {
       })
       return totalLodging
     }, 0)
+    domUpdates.displaySingleFlightCosts(singleTravelerLodgingCost)
+    return singleTravelerLodgingCost 
   }
 
   calculateTotalFlightCostPerTripThisYear(array) {
-    return array.reduce((totalFlightCost, trip) => {
+    const singleTravelerFlightCost =  array.reduce((totalFlightCost, trip) => {
       this.destinationsData.forEach(destination =>{
         if(trip.destinationID === destination.id && Number(trip.date.split('/')[0]) > 2019) {
           totalFlightCost += trip.travelers * destination.estimatedFlightCostPerPerson
@@ -53,10 +52,13 @@ class Traveler {
       })
       return totalFlightCost
     }, 0)
+    domUpdates.displaySingleFlightCosts(singleTravelerFlightCost)
+    return singleTravelerFlightCost
   }
 
   calculateTotalCostOfTrips(num1, num2) {
-    return num1 + num2
+    const totalCostOfTrips = num1 + num2
+    domUpdates.displayTotalCostOfTrips(totalCostOfTrips);
   }
 
   calculateTravelAgency10PercentFee(num) {
