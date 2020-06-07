@@ -51,3 +51,41 @@ main {
       margin-top: 2em;
     }
 }
+
+// Traveler login Page
+.traveler-login-page {
+  @include flex-container(center);
+  flex-direction: column;
+  color: white;
+  @include height-and-width(80%, 50%);
+  margin: 2em;
+  background-color: rgba(50, 46, 46, 0.906);
+  overflow: scroll;
+    // input {
+    //   @include height-and-width(10%, 100%);
+    //   border-bottom: 1px solid gray;
+    //   border-radius: 1px;
+    //   font: rgb(82, 76, 76);
+    //   font-weight: bolder;
+    //   margin-top: 2em;
+    // }
+    // h3 {
+    //   @include height-and-width(8%, 100%);
+    //   display: block;
+    //   color: white;
+    //   padding-left: 1em;
+    // }
+    // h4 {
+    //   @include height-and-width(4%, 100%);
+    //   display: block;
+    //   color: white;
+    //   padding-left: 1em;
+    // }
+    // p {
+    //   display: inline;
+    //   color: white;
+    //   padding-left: 1em;
+    // }
+    // display: none;
+  // }
+}

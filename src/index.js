@@ -18,13 +18,24 @@ function fetchSingleUser(id) {
     ApiFetch.getAllDestinations(),
   ])
     .then((data) => {
-      domUpdates.displayPage();
+      console.log(instantiateSingleTraveler(
+        data[0],
+        data[1].trips,
+        data[2].destinations
+      ));
+      
       return instantiateSingleTraveler(
         data[0],
         data[1].trips,
         data[2].destinations
       );
     })
+    .then(
+      domUpdates.displayPage(),
+
+      // console.log(traveler),
+      travelerPageHandler()
+      )
     .catch((error) => {
       loginPageError.insertAdjacentHTML(
         "afterbegin",
@@ -76,6 +87,15 @@ const loginPageError = document.querySelector("#login-error");
 
 // Event Listeners
 submitButton.addEventListener("click", logIn);
+
+function travelerPageHandler() {
+  var x = 5;
+  domUpdates.displayPage();
+  debugger
+  console.log('traveler', traveler);
+  
+  traveler.findTravelerFirstName();
+}
 
 function logIn(e) {
   console.log("submit Btn", e);

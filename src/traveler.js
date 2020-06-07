@@ -1,8 +1,9 @@
 import ApiFetch from "./apiFetch"
+import domUpdates from "./domUpdates"
 
 class Traveler {
   constructor(travelerData, tripsData, destinationsData) {
-    this.travelerData = this.checkIfDataIsAnObject(travelerData)
+    this.travelerData = this.checkIfDataIsAnObject([travelerData])
     this.tripsData = this.checkIfDataIsArray(tripsData)
     this.destinationsData = this.checkIfDataIsArray(destinationsData)
   }
@@ -17,6 +18,7 @@ class Traveler {
 
   findTravelerFirstName(){
     const firstName = this.travelerData[0].name.split(' ')[0]
+    domUpdates.displayTravelerWelcome()
     return firstName
   }
 
