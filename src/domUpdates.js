@@ -22,10 +22,14 @@
     }
   },
 
-  displayTravelerWelcome() {
+  displayTravelerWelcome(firstName) {
     const travelerHeaderWelcome = document.querySelector('#traveler-Header');
-    travelerHeaderWelcome.innerHTML = `<h2>Your adventure awaits ${traveler.findTravelerFirstName()}!</h>`
-  }
+    travelerHeaderWelcome.innerHTML = `<h2>Your adventure awaits ${firstName}!</h>`
+  },
+
+ displayTravelerTrips(travelerSingleTravelerTrips) {
+
+ }
 
 }
 

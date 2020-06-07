@@ -3,7 +3,7 @@ import domUpdates from "./domUpdates"
 
 class Traveler {
   constructor(travelerData, tripsData, destinationsData) {
-    this.travelerData = this.checkIfDataIsAnObject([travelerData])
+    this.travelerData = this.checkIfDataIsAnObject(travelerData)
     this.tripsData = this.checkIfDataIsArray(tripsData)
     this.destinationsData = this.checkIfDataIsArray(destinationsData)
   }
@@ -17,18 +17,20 @@ class Traveler {
   }
 
   findTravelerFirstName(){
-    const firstName = this.travelerData[0].name.split(' ')[0]
-    domUpdates.displayTravelerWelcome()
-    return firstName
+    const firstName = this.travelerData.name.split(' ')[0]
+    console.log('firstName', this.travelerData);
+    console.log('domUpdates', domUpdates);
+    domUpdates.displayTravelerWelcome(firstName)
   }
 
   findTravelerTrips() {
-    return this.tripsData.reduce((travelerTrips, trip) => {
+    const travelerSingleTravelerTrips = this.tripsData.reduce((travelerTrips, trip) => {
      this.travelerData.forEach(traveler => {
        trip.userID === traveler.id ? travelerTrips.push(trip) : null
      })
      return travelerTrips
     }, [])
+    domUpdates.displayTravelerTrips(travelerSingleTravelerTrips)
   }
 
   calculateTotalLodgingCostPerTripThisYear(array) {

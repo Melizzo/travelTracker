@@ -36,7 +36,7 @@ let traveler;
     expect(traveler.destinationsData).to.equal('Error, data for traveler\'s data cannot be found.')
   });
 
-  it('should have a method that determines whether data passed in is an array', function() {
+  it('should have a method that determines whether data passed in is an object', function() {
     traveler = new Traveler('horse')
     expect(traveler.checkIfDataIsAnObject('horse')).to.equal('Error, data for the traveler cannot be found.')
     expect(traveler.travelerData).to.equal('Error, data for the traveler cannot be found.')

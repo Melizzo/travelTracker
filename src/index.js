@@ -18,24 +18,14 @@ function fetchSingleUser(id) {
     ApiFetch.getAllDestinations(),
   ])
     .then((data) => {
-      console.log(instantiateSingleTraveler(
-        data[0],
-        data[1].trips,
-        data[2].destinations
-      ));
-      
-      return instantiateSingleTraveler(
-        data[0],
-        data[1].trips,
-        data[2].destinations
-      );
+      return data;
     })
-    .then(
-      domUpdates.displayPage(),
+    .then((data) => {
+      traveler = new Traveler(data[0], data[1].trips, data[2].destinations);
+      domUpdates.displayPage();
+      travelerPageHandler();
+    })
 
-      // console.log(traveler),
-      travelerPageHandler()
-      )
     .catch((error) => {
       loginPageError.insertAdjacentHTML(
         "afterbegin",
@@ -51,25 +41,15 @@ function fetchAllTravelers() {
     ApiFetch.getAllDestinations(),
     ApiFetch.getTravelersData(),
   ])
-  .then((data) => {
-    domUpdates.displayPage()
-     return instantiateTravelAgency(
+    .then((data) => {
+      domUpdates.displayPage();
+      return instantiateTravelAgency(
         data[0].trips,
         data[1].destinations,
         data[2].travelers
-      )
-     })
+      );
+    })
     .catch((error) => console.log(error));
-  }
- 
-
-function instantiateSingleTraveler(
-  singleTraveler,
-  tripsData,
-  destinationsData
-) {
-  traveler = new Traveler(singleTraveler, tripsData, destinationsData);
-  return traveler
 }
 
 function instantiateTravelAgency(tripsData, destinationsData, travelersData) {
@@ -89,12 +69,9 @@ const loginPageError = document.querySelector("#login-error");
 submitButton.addEventListener("click", logIn);
 
 function travelerPageHandler() {
-  var x = 5;
-  domUpdates.displayPage();
-  debugger
-  console.log('traveler', traveler);
-  
+  console.log("handler traveler", traveler);
   traveler.findTravelerFirstName();
+  traveler.findTravelerTrips();
 }
 
 function logIn(e) {
@@ -120,13 +97,13 @@ function findUserName() {
   if (document.querySelector("#login-username-input").value === "manager") {
     fetchAllTravelers({});
   } else {
-    const travelerId = Number(
-      document
-        .querySelector("#login-username-input")
-        .value.split("")
-        .splice(8)
-        .join()
-    );
+    const travelerId = document
+      .querySelector("#login-username-input")
+      .value.split("")
+      .filter((char) => !isNaN(char + 1))
+      .join("");
+    console.log(travelerId);
+
     fetchSingleUser(travelerId);
   }
 }
@@ -137,4 +114,3 @@ function validatePassword() {
   }
   return true;
 }
-
