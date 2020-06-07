@@ -68,6 +68,7 @@ document.addEventListener('click', (e) => {
   if(e.target.id === 'calculate-estimate-button') {
     e.preventDefault()
     const trip = tentiativeTrip()
+    domUpdates.displayTentativeTrip(trip, traveler.destinationsData)
   }
 })
 
@@ -77,8 +78,8 @@ function tentiativeTrip() {
     userID: traveler.travelerData.id,
     destinationID: +document.getElementById('destination-Form-ID').value,
     travelers: +document.getElementById('number-travelers-Form-ID').value, 
-    date: document.getElementById('select-date-trip').value.format('YYYY/MM/DD'),
-    duration: +document.getElementById('number-days-of-trip-Form').split('-').join('/'),
+    date: document.getElementById('select-date-trip').value.split('-').join('/'),
+    duration: +document.getElementById('number-days-of-trip-Form').value,
     status: 'pending',
     suggestedActivities: []
   }

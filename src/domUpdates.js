@@ -18,8 +18,9 @@ let domUpdates = {
   },
 
   displayTentativeTrip(trip, destinationsData) {
-    
-  }
+    const destination = destinationsData.find(destination => destination.id === trip.destinationID)
+    console.log(destination)
+  },
 
   displayTravelerWelcome(firstName) {
     const travelerHeaderWelcome = document.querySelector("#traveler-Header");
