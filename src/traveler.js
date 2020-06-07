@@ -68,11 +68,6 @@ class Traveler {
     return (0.10 * num)
   }
 
-  // createNewTrip{
-    // build object {} here
-  //   ApiFetch(object)
-  // }
-
 }
 
 export default Traveler;

@@ -1,4 +1,5 @@
 // QuerySelectors
+import traveler from "./traveler";
 
 let domUpdates = {
   displayPage() {
@@ -19,7 +20,18 @@ let domUpdates = {
 
   displayTentativeTrip(trip, destinationsData) {
     const destination = destinationsData.find(destination => destination.id === trip.destinationID)
-    console.log(destination)
+    const tripCost = this.calculateCostOfTentativeTrip(trip, destination)
+    console.log(tripCost);
+    
+    document.getElementById('book-traveler-trip').classList.add('hidden')
+    document.getElementById('show-traveler-trip').classList.remove('hidden')
+  },
+
+  calculateCostOfTentativeTrip(trip, destination) {
+    const airfareCost = trip.travelers * destination.estimatedFlightCostPerPerson
+    const lodgingCost = trip.duration * destination.estimatedLodgingCostPerDay
+    const agent10PercentFee = (airfareCost + lodgingCost) * .10
+    return Number((airfareCost + lodgingCost + agent10PercentFee).toFixed(2))
   },
 
   displayTravelerWelcome(firstName) {
@@ -29,9 +41,9 @@ let domUpdates = {
 
   displayTravelerTrips(SingleTravelerTrips, destinationsData) {
     const singleTravelersTrips = document.querySelector("#traveler-trips");
-    console.log(SingleTravelerTrips.length);
+    // console.log(SingleTravelerTrips.length);
     return SingleTravelerTrips.map(trip => {
-      console.log('trip', trip);
+      // console.log('trip', trip);
       destinationsData.forEach(destination => {
         if(trip.destinationID === destination.id) {
          return singleTravelersTrips.insertAdjacentHTML("beforeend", `<p>Location: ${destination.destination}<p>

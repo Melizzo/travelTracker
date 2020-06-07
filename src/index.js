@@ -10,6 +10,7 @@ import "./images/loginPageTravel.jpg";
 let traveler;
 let travelAgent;
 
+
 // Data Fetching
 function fetchSingleUser(id) {
   return Promise.all([
@@ -65,15 +66,24 @@ const loginPageError = document.querySelector("#login-error");
 document.getElementById('login-submit-button').addEventListener('click', logIn)
 
 document.addEventListener('click', (e) => {
-  if(e.target.id === 'calculate-estimate-button') {
+  if(e.target.id === 'calculate-trip-estimate-button') {
     e.preventDefault()
-    const trip = tentiativeTrip()
+    const trip = tentativeTrip()
     domUpdates.displayTentativeTrip(trip, traveler.destinationsData)
+  }
+  if(e.target.id === 'post-traveler-trip-button') {
+    // api.postTrip
   }
 })
 
-function tentiativeTrip() {
-  const trip = {
+function travelerPageHandler() {
+  traveler.findTravelerFirstName();
+  traveler.findTravelerTrips()
+  traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
+}
+
+function tentativeTrip() {
+   const trip = {
     id: Date.now(),
     userID: traveler.travelerData.id,
     destinationID: +document.getElementById('destination-Form-ID').value,
@@ -87,10 +97,12 @@ function tentiativeTrip() {
   return trip
 }
 
-function travelerPageHandler() {
-  traveler.findTravelerFirstName();
-  traveler.findTravelerTrips()
-  traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
+function calculateTripCost(destinationsData) {
+  let destination = this.getDestination(destinationsData)
+  let airfare = this.travelers * destination.estimatedFlightCostPerPerson
+  let lodging = this.duration * destination.estimatedLodgingCostPerDay
+  let agentFee = (airfare + lodging) * .10
+  return Number((airfare + lodging + agentFee).toFixed(2))
 }
 
 function logIn(e) {
