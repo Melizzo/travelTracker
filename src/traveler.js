@@ -22,12 +22,12 @@ class Traveler {
   }
 
   findTravelerTrips() {
-    const SingleTravelerTrips = this.tripsData.reduce((travelerTrips, trip) => {
-       trip.userID === this.travelerData.id ? travelerTrips.push(trip) : null
-     return travelerTrips
-    }, [])
-    domUpdates.displayTravelerTrips(SingleTravelerTrips, this.destinationsData)
-    return SingleTravelerTrips
+    const singleTravelerTrips = this.tripsData.filter(trip => {
+      if(trip.userID === this.travelerData.id) {
+        return trip
+      } 
+    })
+    domUpdates.displayTravelerTrips(singleTravelerTrips, this.destinationsData)
   }
 
   calculateTotalLodgingCostPerTripThisYear(array) {

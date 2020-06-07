@@ -70,27 +70,23 @@ main {
     //   font-weight: bolder;
     //   margin-top: 2em;
     // }
-    // h3 {
-    //   @include height-and-width(8%, 100%);
-    //   display: block;
-    //   color: white;
-    //   padding-left: 1em;
-    // }
+    h3 {
+      @include height-and-width(8%, 100%);
+      display: block;
+      color: white;
+      padding-left: 1em;
+    }
     // h4 {
     //   @include height-and-width(4%, 100%);
     //   display: block;
     //   color: white;
     //   padding-left: 1em;
     // }
-    // p {
-    //   display: inline;
-    //   color: white;
-    //   padding-left: 1em;
-    // }
+    p {
+      display: inline;
+      color: white;
+      padding-left: 1em;
+    }
     // display: none;
   // }
-}
-
-.display-traveler-trips {
-  overflow: scroll;
 }

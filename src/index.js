@@ -25,7 +25,6 @@ function fetchSingleUser(id) {
       domUpdates.displayPage();
       travelerPageHandler();
     })
-
     .catch((error) => {
       loginPageError.insertAdjacentHTML(
         "afterbegin",
@@ -71,9 +70,8 @@ submitButton.addEventListener("click", logIn);
 function travelerPageHandler() {
   traveler.findTravelerFirstName();
   traveler.findTravelerTrips()
-  // const trythis = traveler.findTravelerTrips();
-  traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips());
-  traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
+  // traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips());
+  // traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
 }
 
 function logIn(e) {

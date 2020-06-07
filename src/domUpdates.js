@@ -23,12 +23,16 @@ let domUpdates = {
     travelerHeaderWelcome.innerHTML = `<h2>Your adventure awaits ${firstName}!</h2>`;
   },
 
-  displayTravelerTrips(singleTravelerTrips, destinationsData) {
+  displayTravelerTrips(SingleTravelerTrips, destinationsData) {
     const singleTravelersTrips = document.querySelector("#traveler-trips");
-    singleTravelerTrips.forEach(trip => {
+    // console.log(singleTravelerTrips);
+    return SingleTravelerTrips.map(trip => {
+      console.log('trip', trip);
       destinationsData.forEach(destination => {
         if(trip.destinationID === destination.id) {
-          singleTravelersTrips.innerHTML += `<p>${destination.destination}: ${trip.destinationID}<p>`
+         return singleTravelersTrips.insertAdjacentHTML("beforeend", `<p>Location: ${destination.destination}<p>
+          <p>Total Travelers: ${trip.travelers}<p>
+          <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>`)  
         }
       })
     })
