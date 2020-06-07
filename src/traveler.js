@@ -28,10 +28,12 @@ class Traveler {
       } 
     })
     domUpdates.displayTravelerTrips(singleTravelerTrips, this.destinationsData)
+    return singleTravelerTrips
   }
 
-  calculateTotalLodgingCostPerTripThisYear(array) {
-    const singleTravelerLodgingCost = array.reduce((totalLodging, trip) => {
+  calculateTotalLodgingCostPerTripThisYear() {
+    const singleTravelerLodgingCost = this.findTravelerTrips()
+    const lodgingCosts = singleTravelerLodgingCost.reduce((totalLodging, trip) => {
       this.destinationsData.forEach(destination => {
         if(trip.destinationID === destination.id && Number(trip.date.split('/')[0]) > 2019) {
           totalLodging += trip.duration * destination.estimatedLodgingCostPerDay
@@ -39,12 +41,13 @@ class Traveler {
       })
       return totalLodging
     }, 0)
-    domUpdates.displaySingleFlightCosts(singleTravelerLodgingCost)
-    return singleTravelerLodgingCost 
+    // domUpdates.displaySingleLodgingCosts(lodgingCosts)
+    return lodgingCosts 
   }
 
-  calculateTotalFlightCostPerTripThisYear(array) {
-    const singleTravelerFlightCost =  array.reduce((totalFlightCost, trip) => {
+  calculateTotalFlightCostPerTripThisYear() {
+    const singleTravelerFlightCost = this.findTravelerTrips()
+    const flightCosts =  singleTravelerFlightCost.reduce((totalFlightCost, trip) => {
       this.destinationsData.forEach(destination =>{
         if(trip.destinationID === destination.id && Number(trip.date.split('/')[0]) > 2019) {
           totalFlightCost += trip.travelers * destination.estimatedFlightCostPerPerson
@@ -52,12 +55,12 @@ class Traveler {
       })
       return totalFlightCost
     }, 0)
-    domUpdates.displaySingleFlightCosts(singleTravelerFlightCost)
-    return singleTravelerFlightCost
+    // domUpdates.displaySingleFlightCosts(flightCosts)
+    return flightCosts
   }
 
-  calculateTotalCostOfTrips(num1, num2) {
-    const totalCostOfTrips = num1 + num2
+  calculateTotalCostOfTrips() {
+    const totalCostOfTrips = this.calculateTotalFlightCostPerTripThisYear() + this.calculateTotalLodgingCostPerTripThisYear()
     domUpdates.displayTotalCostOfTrips(totalCostOfTrips);
   }
 

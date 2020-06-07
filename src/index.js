@@ -61,17 +61,35 @@ function instantiateTravelAgency(tripsData, destinationsData, travelersData) {
 }
 
 // QuerySelectors
-const submitButton = document.querySelector("#login-submit-button");
 const loginPageError = document.querySelector("#login-error");
+document.getElementById('login-submit-button').addEventListener('click', logIn)
 
-// Event Listeners
-submitButton.addEventListener("click", logIn);
+document.addEventListener('click', (e) => {
+  if(e.target.id === 'calculate-estimate-button') {
+    e.preventDefault()
+    const trip = tentiativeTrip()
+  }
+})
+
+function tentiativeTrip() {
+  const trip = {
+    id: Date.now(),
+    userID: traveler.travelerData.id,
+    destinationID: +document.getElementById('destination-Form-ID').value,
+    travelers: +document.getElementById('number-travelers-Form-ID').value, 
+    date: document.getElementById('select-date-trip').value.format('YYYY/MM/DD'),
+    duration: +document.getElementById('number-days-of-trip-Form').split('-').join('/'),
+    status: 'pending',
+    suggestedActivities: []
+  }
+  console.log(trip);
+  return trip
+}
 
 function travelerPageHandler() {
   traveler.findTravelerFirstName();
   traveler.findTravelerTrips()
-  // traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips());
-  // traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
+  traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
 }
 
 function logIn(e) {

@@ -21,10 +21,19 @@
         <header id="traveler-Header" class="display-User-First-Name"></header>
         <section id="traveler-Cost-Section" class="display-traveler-costs">
           <div id="traveler-lodging-Cost-Section"></div>
-          <div id="traveler-flights-Cost-Section"></div>
+          <div id="traveler-flights-Cost-Section" class="display-traveler-costs"></div>
         </section>
         <section id="traveler-trips" class="display-traveler-trips">Look at all of your travels:</section>
+        <form id="book-traveler-trip">
+          <input id="destination-Form-ID" class="display-destination-input" aria-label="enter-destination-id" type="text" required>enter destination id</input>
+          <input id="number-travelers-Form-ID" class="display-travelers-input" aria-label="enter-number-of-travelers" min="1" type="number" value= "1" required>enter number of travelers</input>
+          <label for="start">Select the date you want to leave:</label>
+          <input type="date" id="select-date-trip" name="trip-start" value="2020-06-10" min="2020-06-10">
+          <input id="number-days-of-trip-Form" class="display-days-travel-input" aria-label="enter-days-of-trip" type="number" value= "1" required>enter in the amount of days this trip will last</input>
+          <button id="calculate-estimate-button" aria-label="submit-trip" type="submit">Submit</button>
+        </form>
       </section>
+
       <section id="travel-agency-page" class="hidden"></section>
     </main>
 

@@ -35,7 +35,7 @@ let ApiFetch = {
       headers: {
         'Content-Type': 'application/json'
       },
-        body: JSON.stringify(TOBEDETERMINEDOBJECT) ({
+        body: JSON.stringify({}) ({
         // {id: <number>, 
         // userID: <number>, 
         // destinationID: <number>, 
@@ -43,7 +43,6 @@ let ApiFetch = {
         // date: <string 'YYYY/MM/DD'>, 
         // duration: <number>, 
         // status: <string 'approved' or 'pending'>, 
-        // suggestedActivities: <array of strings>}
       })
       .then(response => {
         if(!response.ok) {
