@@ -83,8 +83,7 @@ document.addEventListener('click', (e) => {
 })
 
 function travelerPageHandler() {
-  // traveler.findTravelerTrips()
-  traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
+  // traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
 }
 
 function tentativeTrip() {

@@ -19,54 +19,53 @@ let domUpdates = {
   },
 
   displayTentativeTrip(trip, destinationsData) {
-    const destination = destinationsData.find(destination => destination.id === trip.destinationID)
+    const destination = destinationsData.find(
+      (destination) => destination.id === trip.destinationID
+    );
     const tripCost = this.calculateCostOfTentativeTrip(trip, destination);
-    document.getElementById('book-traveler-trip').classList.add('hidden');
-    document.getElementById('show-traveler-trip').classList.remove('hidden');
-    document.getElementById('destination-confirmation-trip-section').innerText = `Destination : ${destination.destination}`;
-    document.getElementById('date-confirmation-trip-section').innerText = `You are leaving on : ${trip.date} for ${trip.duration} days`;
-    document.getElementById('total-travelers-confirmation-trip-section').innerText = `Total travelers: ${trip.travelers}`;
-    document.getElementById('estimated-cost-confirmation-trip-section').innerText = `Total Cost: $${tripCost}`;
-
+    document.getElementById("book-traveler-trip").classList.add("hidden");
+    document.getElementById("show-traveler-trip").classList.remove("hidden");
+    document.getElementById(
+      "destination-confirmation-trip-section"
+    ).innerText = `Destination : ${destination.destination}`;
+    document.getElementById(
+      "date-confirmation-trip-section"
+    ).innerText = `You are leaving on : ${trip.date} for ${trip.duration} days`;
+    document.getElementById(
+      "total-travelers-confirmation-trip-section"
+    ).innerText = `Total travelers: ${trip.travelers}`;
+    document.getElementById(
+      "estimated-cost-confirmation-trip-section"
+    ).innerText = `Total Cost: $${tripCost}`;
   },
 
   calculateCostOfTentativeTrip(trip, destination) {
-    const airfareCost = trip.travelers * destination.estimatedFlightCostPerPerson
-    const lodgingCost = trip.duration * destination.estimatedLodgingCostPerDay
-    const agent10PercentFee = (airfareCost + lodgingCost) * .10
-    return Number((airfareCost + lodgingCost + agent10PercentFee).toFixed(2))
+    const airfareCost =
+      trip.travelers * destination.estimatedFlightCostPerPerson;
+    const lodgingCost = trip.duration * destination.estimatedLodgingCostPerDay;
+    const agent10PercentFee = (airfareCost + lodgingCost) * 0.1;
+    return Number((airfareCost + lodgingCost + agent10PercentFee).toFixed(2));
   },
 
   displayTravelerInformation(traveler) {
-    document.getElementById('traveler-Header').innerHTML = `<h2>Your adventure awaits ${traveler.findTravelerFirstName()}!</h2>`;
-    // console.log('DOM traveler.findDestinationsOfTravelersTrips()', traveler.findDestinationsOfTravelersTrips());
-
-    // const singleTravelerTrips = traveler.findTravelerTrips()
-    // return singleTravelerTrips.map(trip => {
-    //   destinationsData.forEach(destination => {
-    //     if(trip.destinationID === destination.id) {
-    //      return document.getElementById('traveler-trips').insertAdjacentHTML("beforeend", `<p>Location: ${destination.destination}<p>
-    //       <p>Total Travelers: ${trip.travelers}<p>
-    //       <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>`)  
-    //     }
-    //   })
-    // })
-    // document.getElementById('traveler-trips').insertAdjacentHTML("beforeend", `<p>Location: ${destination.destination}<p>
+    document.getElementById(
+      "traveler-Header"
+    ).innerHTML = `<h2>Your adventure awaits ${traveler.findTravelerFirstName()}!</h2>`;
+    const singleTravelerTrips = traveler.findTravelerTrips();
+    const singleTravelerDestinations = traveler.findDestinationsOfTravelersTrips();
+    return singleTravelerTrips.forEach((trip) => {
+      singleTravelerDestinations.forEach((destination) => {
+        if (trip.destinationID === destination.id) {
+          document.getElementById("traveler-trips").insertAdjacentHTML(
+            "beforeend",
+            `<p>Location: ${destination.destination}<p>
+          <p>Total Travelers: ${trip.travelers}<p>
+          <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>`
+          );
+        }
+      });
+    });
   },
-
-  // displayTravelerTrips(SingleTravelerTrips, destinationsData) {
-  //   // const singleTravelersTrips = document.querySelector("#traveler-trips");
-  //   // console.log(SingleTravelerTrips.length);
-  //   return SingleTravelerTrips.map(trip => {
-  //     destinationsData.forEach(destination => {
-  //       if(trip.destinationID === destination.id) {
-  //        return singleTravelersTrips.insertAdjacentHTML("beforeend", `<p>Location: ${destination.destination}<p>
-  //         <p>Total Travelers: ${trip.travelers}<p>
-  //         <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>`)  
-  //       }
-  //     })
-  //   })
-  // },
 
   displayTotalCostOfTrips(totalCostOfTrips) {
     const travelerCosts = document.querySelector("#traveler-Cost-Section");
@@ -82,9 +81,6 @@ let domUpdates = {
   //   const travelerFlightCosts = document.querySelector("#traveler-flights-Cost-Section");
   //   travelerFlightCosts.innerHTML = `<h3>and $${singleTravelerFlightCost} was spent on flights</h3>`;
   // },
-
-   
-
 };
 
 export default domUpdates;
