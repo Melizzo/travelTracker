@@ -53,7 +53,7 @@ let domUpdates = {
     ).innerHTML = `<h2>Your adventure awaits ${traveler.findTravelerFirstName()}!</h2>`;
     const singleTravelerTrips = traveler.findTravelerTrips();
     const singleTravelerDestinations = traveler.findDestinationsOfTravelersTrips();
-    return singleTravelerTrips.forEach((trip) => {
+    singleTravelerTrips.forEach((trip) => {
       singleTravelerDestinations.forEach((destination) => {
         if (trip.destinationID === destination.id) {
           document.getElementById("traveler-trips").insertAdjacentHTML(
@@ -65,22 +65,21 @@ let domUpdates = {
         }
       });
     });
+    this.displayTravelerTotalCostFor2020(traveler);
   },
 
-  displayTotalCostOfTrips(totalCostOfTrips) {
-    const travelerCosts = document.querySelector("#traveler-Cost-Section");
-    travelerCosts.innerHTML = `<h3>For 2020, you have spent $${totalCostOfTrips} on travel</h3>`;
+  displayTravelerTotalCostFor2020(traveler) {
+    const flightsCost2020 = traveler.calculateTotalFlightCostPerTripThisYear();
+    const lodgingCost2020 = traveler.calculateTotalLodgingCostPerTripThisYear();
+    const total = traveler.calculateTotalCostOfTrips(
+      lodgingCost2020,
+      flightsCost2020
+    );
+    const travelAgencyFees = traveler.calculateTravelAgency10PercentFee(total);
+    document.getElementById(
+      "traveler-Cost-Section"
+    ).innerText = `Your total Spent for 2020 is: ${total}, Of that total, $${lodgingCost2020} was spent on lodging, and $${flightsCost2020} was spent on flights. $${travelAgencyFees} were Travel Agency Fees`;
   },
-
-  // displaySingleLodgingCosts(singleTravelerLodgingCost) {
-  //   const travelerLodgingCosts = document.querySelector("#traveler-lodging-Cost-Section");
-  //   travelerLodgingCosts.innerHTML = `<h3>Of that total, $${singleTravelerLodgingCost} was spent on lodging,</h3>`;
-  // },
-
-  // displaySingleFlightCosts(singleTravelerFlightCost){
-  //   const travelerFlightCosts = document.querySelector("#traveler-flights-Cost-Section");
-  //   travelerFlightCosts.innerHTML = `<h3>and $${singleTravelerFlightCost} was spent on flights</h3>`;
-  // },
 };
 
 export default domUpdates;
