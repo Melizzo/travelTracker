@@ -20,11 +20,14 @@ let domUpdates = {
 
   displayTentativeTrip(trip, destinationsData) {
     const destination = destinationsData.find(destination => destination.id === trip.destinationID)
-    const tripCost = this.calculateCostOfTentativeTrip(trip, destination)
-    console.log(tripCost);
-    
-    document.getElementById('book-traveler-trip').classList.add('hidden')
-    document.getElementById('show-traveler-trip').classList.remove('hidden')
+    const tripCost = this.calculateCostOfTentativeTrip(trip, destination);
+    document.getElementById('book-traveler-trip').classList.add('hidden');
+    document.getElementById('show-traveler-trip').classList.remove('hidden');
+    document.getElementById('destination-confirmation-trip-section').innerText = `Destination : ${destination.destination}`;
+    document.getElementById('date-confirmation-trip-section').innerText = `You are leaving on : ${trip.date} for ${trip.duration} days`;
+    document.getElementById('total-travelers-confirmation-trip-section').innerText = `Total travelers: ${trip.travelers}`;
+    document.getElementById('estimated-cost-confirmation-trip-section').innerText = `Total Cost: $${tripCost}`;
+
   },
 
   calculateCostOfTentativeTrip(trip, destination) {

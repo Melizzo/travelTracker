@@ -103,3 +103,7 @@ main {
       font: rgb(82, 76, 76);
       margin-top: 2em;
 }
+
+.img {
+  @include height-and-width(50%, 50%)
+}
