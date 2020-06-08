@@ -18,10 +18,41 @@ let domUpdates = {
       travelerPage.classList.add("traveler-login-page");
     }
   },
+
+  // TravelAgency
   displayTravelAgentInformation(travelAgent) {
     console.log(`This is the page for the Travel Agent`);
+    domUpdates.displayAllPendingTravelersTrip(travelAgent)
   },
+  
+  displayAllPendingTravelersTrip(travelAgent){
+    const pendingTrips = travelAgent.findAllPendingTrips()
+    const destinations = travelAgent.destinationsData
+    console.log(destinations);
+    console.log(pendingTrips);
+    
+    
+    if(pendingTrips.length === 0){
+      document.getElementById('travel-agency-all-pending-trips').insertAdjacentHTML(
+        "afterbegin", `<p>There are no pending trips that need approved!</p>`) 
+    } 
+    else {
+      pendingTrips.forEach(trip => {
+        destinations.forEach(destination => {
+          if(trip.destinationID === destination.id) {
+            document.getElementById('travel-agency-all-pending-trips').insertAdjacentHTML(
+              "afterbegin", `<h3>Pending Trip's that need approval:</h3>
+              <p>Trip Booking id: ${trip.id} for Traveler id: ${trip.userID} </p>
+              <p>Location: ${destination.destination}</p><p>Total Travelers: ${trip.travelers}<p>
+              <p>Trip begins on: ${trip.date}, and will last for ${trip.duration} days!<p>`) 
+          }
+        })
+      })
+    } 
+  },
+  
 
+// Traveler
   displayBookTripForm() {
     document.getElementById("book-traveler-trip").classList.remove("hidden");
     document.getElementById("show-traveler-trip").classList.add("hidden");

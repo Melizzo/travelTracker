@@ -44,6 +44,7 @@ function fetchAllTravelers() {
     .then((data) => {
       domUpdates.displayPage();
       travelAgent = new TravelAgency(
+        {},
         data[0].trips,
         data[1].destinations,
         data[2].travelers
@@ -70,11 +71,11 @@ document.addEventListener('click', (e) => {
     const tripObject = tentativeTrip();
     console.log('tripObject', tripObject);
     ApiFetch.postNewTrip(tripObject)
-    .then(() => Api.getAllTrips()) 
+    .then(() => ApiFetch.getAllTrips()) 
     .then(response => {
       console.log(response)
       domUpdates.displayBookTripForm()
-      displayTravelerInformation(traveler)
+      domUpdates.displayTravelerInformation(traveler)
     })
     .catch(err => console.log(err))
   }

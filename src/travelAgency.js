@@ -30,8 +30,9 @@ class TravelAgency extends Traveler {
       return totalFlights
     }, 0)
   }
+  
 
-  findPendingTrips() {
+  findAllPendingTrips() {
     return this.tripsData.filter(trip => trip.status === 'pending');
   }
 

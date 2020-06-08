@@ -36,15 +36,14 @@ let ApiFetch = {
         'Content-Type': 'application/json'
       },
       //error Uncaught TypeError: JSON.stringify(...) is not a function
-        body: JSON.stringify(bookedTrip) ({
-      })
+        body: JSON.stringify(bookedTrip)
+    })
       .then(response => {
         if(!response.ok) {
           throw response.message
         }
         return response.json()})
       .catch(err => {throw err})
-    })
   },
 
   // modifySingleTrip(TOBEDETERMINEDOBJECT) {
