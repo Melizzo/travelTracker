@@ -39,7 +39,7 @@ let domUpdates = {
 
   displayTravelerInformation(traveler) {
     document.getElementById('traveler-Header').innerHTML = `<h2>Your adventure awaits ${traveler.findTravelerFirstName()}!</h2>`;
-    console.log('DOM traveler.findDestinationsOfTravelersTrips()', traveler.findDestinationsOfTravelersTrips());
+    // console.log('DOM traveler.findDestinationsOfTravelersTrips()', traveler.findDestinationsOfTravelersTrips());
 
     // const singleTravelerTrips = traveler.findTravelerTrips()
     // return singleTravelerTrips.map(trip => {
