@@ -29,20 +29,13 @@ let ApiFetch = {
    .then(response => response.json())
   },
 
-  postNewTrip(TOBEDETERMINEDOBJECT) {
+  postNewTrip(bookedTrip) {
     return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-        body: JSON.stringify({}) ({
-        // {id: <number>, 
-        // userID: <number>, 
-        // destinationID: <number>, 
-        // travelers: <number>, 
-        // date: <string 'YYYY/MM/DD'>, 
-        // duration: <number>, 
-        // status: <string 'approved' or 'pending'>, 
+        body: JSON.stringify(bookedTrip) ({
       })
       .then(response => {
         if(!response.ok) {

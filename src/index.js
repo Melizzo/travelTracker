@@ -24,7 +24,7 @@ function fetchSingleUser(id) {
     .then((data) => {
       traveler = new Traveler(data[0], data[1].trips, data[2].destinations);
       domUpdates.displayPage();
-      travelerPageHandler();
+      domUpdates.displayTravelerInformation(traveler)
     })
     .catch((error) => {
       loginPageError.insertAdjacentHTML(
@@ -72,13 +72,18 @@ document.addEventListener('click', (e) => {
     domUpdates.displayTentativeTrip(trip, traveler.destinationsData)
   }
   if(e.target.id === 'post-traveler-trip-button') {
-    // api.postTrip
+    const tripObject = tentativeTrip();
+    ApiFetch.postNewTrip(tripObject)
+    .then(() => getAllTrips()) 
+    .then(response => {
+      console.log(response)
+    })
+    .catch(err => console.log(err))
   }
 })
 
 function travelerPageHandler() {
-  traveler.findTravelerFirstName();
-  traveler.findTravelerTrips()
+  // traveler.findTravelerTrips()
   traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
 }
 
@@ -95,14 +100,6 @@ function tentativeTrip() {
   }
   console.log(trip);
   return trip
-}
-
-function calculateTripCost(destinationsData) {
-  let destination = this.getDestination(destinationsData)
-  let airfare = this.travelers * destination.estimatedFlightCostPerPerson
-  let lodging = this.duration * destination.estimatedLodgingCostPerDay
-  let agentFee = (airfare + lodging) * .10
-  return Number((airfare + lodging + agentFee).toFixed(2))
 }
 
 function logIn(e) {

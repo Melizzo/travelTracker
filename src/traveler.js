@@ -1,4 +1,4 @@
-import ApiFetch from "./apiFetch"
+
 import domUpdates from "./domUpdates"
 
 class Traveler {
@@ -18,7 +18,7 @@ class Traveler {
 
   findTravelerFirstName(){
     const firstName = this.travelerData.name.split(' ')[0]
-    domUpdates.displayTravelerWelcome(firstName)
+    return firstName
   }
 
   findTravelerTrips() {
@@ -27,8 +27,21 @@ class Traveler {
         return trip
       } 
     })
-    domUpdates.displayTravelerTrips(singleTravelerTrips, this.destinationsData)
+    // domUpdates.displayTravelerTrips(singleTravelerTrips, this.destinationsData)
     return singleTravelerTrips
+  }
+
+  findDestinationsOfTravelersTrips() {
+    return this.findTravelerTrips().map(trip => {
+      this.destinationsData.forEach(destination => {
+        if(trip.destinationID === destination.id) {
+          console.log('traveler class destination', destination);
+          // can't return from a forEach, but want to map the destinations
+          // and compare trips or filter based on matching ids - 
+        }
+      })
+      return destination
+    })
   }
 
   calculateTotalLodgingCostPerTripThisYear() {

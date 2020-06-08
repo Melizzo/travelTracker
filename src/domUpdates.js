@@ -37,25 +37,36 @@ let domUpdates = {
     return Number((airfareCost + lodgingCost + agent10PercentFee).toFixed(2))
   },
 
-  displayTravelerWelcome(firstName) {
-    const travelerHeaderWelcome = document.querySelector("#traveler-Header");
-    travelerHeaderWelcome.innerHTML = `<h2>Your adventure awaits ${firstName}!</h2>`;
+  displayTravelerInformation(traveler) {
+    document.getElementById('traveler-Header').innerHTML = `<h2>Your adventure awaits ${traveler.findTravelerFirstName()}!</h2>`;
+    console.log('DOM traveler.findDestinationsOfTravelersTrips()', traveler.findDestinationsOfTravelersTrips());
+
+    // const singleTravelerTrips = traveler.findTravelerTrips()
+    // return singleTravelerTrips.map(trip => {
+    //   destinationsData.forEach(destination => {
+    //     if(trip.destinationID === destination.id) {
+    //      return document.getElementById('traveler-trips').insertAdjacentHTML("beforeend", `<p>Location: ${destination.destination}<p>
+    //       <p>Total Travelers: ${trip.travelers}<p>
+    //       <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>`)  
+    //     }
+    //   })
+    // })
+    // document.getElementById('traveler-trips').insertAdjacentHTML("beforeend", `<p>Location: ${destination.destination}<p>
   },
 
-  displayTravelerTrips(SingleTravelerTrips, destinationsData) {
-    const singleTravelersTrips = document.querySelector("#traveler-trips");
-    // console.log(SingleTravelerTrips.length);
-    return SingleTravelerTrips.map(trip => {
-      // console.log('trip', trip);
-      destinationsData.forEach(destination => {
-        if(trip.destinationID === destination.id) {
-         return singleTravelersTrips.insertAdjacentHTML("beforeend", `<p>Location: ${destination.destination}<p>
-          <p>Total Travelers: ${trip.travelers}<p>
-          <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>`)  
-        }
-      })
-    })
-  },
+  // displayTravelerTrips(SingleTravelerTrips, destinationsData) {
+  //   // const singleTravelersTrips = document.querySelector("#traveler-trips");
+  //   // console.log(SingleTravelerTrips.length);
+  //   return SingleTravelerTrips.map(trip => {
+  //     destinationsData.forEach(destination => {
+  //       if(trip.destinationID === destination.id) {
+  //        return singleTravelersTrips.insertAdjacentHTML("beforeend", `<p>Location: ${destination.destination}<p>
+  //         <p>Total Travelers: ${trip.travelers}<p>
+  //         <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>`)  
+  //       }
+  //     })
+  //   })
+  // },
 
   displayTotalCostOfTrips(totalCostOfTrips) {
     const travelerCosts = document.querySelector("#traveler-Cost-Section");
