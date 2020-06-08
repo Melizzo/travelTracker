@@ -1,69 +1,112 @@
-import ApiFetch from "./apiFetch"
+import domUpdates from "./domUpdates";
 
 class Traveler {
   constructor(travelerData, tripsData, destinationsData) {
-    this.travelerData = this.checkIfDataIsAnObject(travelerData)
-    this.tripsData = this.checkIfDataIsArray(tripsData)
-    this.destinationsData = this.checkIfDataIsArray(destinationsData)
+    this.travelerData = this.checkIfDataIsAnObject(travelerData);
+    this.tripsData = this.checkIfDataIsArray(tripsData);
+    this.destinationsData = this.checkIfDataIsArray(destinationsData);
   }
 
   checkIfDataIsAnObject(data) {
-    return data instanceof Object ? data : "Error, data for the traveler cannot be found."
+    return data instanceof Object
+      ? data
+      : "Error, data for the traveler cannot be found.";
   }
 
   checkIfDataIsArray(data) {
-    return data instanceof Array ? data : "Error, data for traveler\'s data cannot be found."
+    return data instanceof Array
+      ? data
+      : "Error, data for traveler's data cannot be found.";
   }
 
-  findTravelerFirstName(){
-    const firstName = this.travelerData[0].name.split(' ')[0]
-    return firstName
+  findTravelerFirstName() {
+    const firstName = this.travelerData.name.split(" ")[0];
+    return firstName;
   }
 
   findTravelerTrips() {
-    return this.tripsData.reduce((travelerTrips, trip) => {
-     this.travelerData.forEach(traveler => {
-       trip.userID === traveler.id ? travelerTrips.push(trip) : null
-     })
-     return travelerTrips
-    }, [])
+    const singleTravelerTrips = this.tripsData.filter((trip) => {
+      if (trip.userID === this.travelerData.id) {
+        return trip;
+      }
+    });
+    // domUpdates.displayTravelerTrips(singleTravelerTrips, this.destinationsData)
+    return singleTravelerTrips;
   }
 
-  calculateTotalLodgingCostPerTripThisYear(array) {
-    return array.reduce((totalLodging, trip) => {
-      this.destinationsData.forEach(destination => {
-        if(trip.destinationID === destination.id && Number(trip.date.split('/')[0]) > 2019) {
-          totalLodging += trip.duration * destination.estimatedLodgingCostPerDay
-        } 
-      })
-      return totalLodging
-    }, 0)
-  }
-
-  calculateTotalFlightCostPerTripThisYear(array) {
-    return array.reduce((totalFlightCost, trip) => {
-      this.destinationsData.forEach(destination =>{
-        if(trip.destinationID === destination.id && Number(trip.date.split('/')[0]) > 2019) {
-          totalFlightCost += trip.travelers * destination.estimatedFlightCostPerPerson
+  findDestinationsOfTravelersTrips() {
+    const travelersTrips = this.findTravelerTrips();
+    const result = this.destinationsData.reduce((acc, destination) => {
+      travelersTrips.forEach((trip) => {
+        if (
+          destination.id === trip.destinationID &&
+          !acc.includes(destination)
+        ) {
+          acc.push(destination);
         }
-      })
-      return totalFlightCost
-    }, 0)
+      });
+      return acc;
+    }, []);
+    return result;
   }
 
-  calculateTotalCostOfTrips(num1, num2) {
-    return num1 + num2
+  findPendingTrips() {
+    const travelersTrips = this.findTravelerTrips();
+    const pendingTrips = travelersTrips.filter(trip => trip.status === 'pending')
+    return pendingTrips
+  }
+
+  calculateTotalLodgingCostPerTripThisYear() {
+    const singleTravelerLodgingCost = this.findTravelerTrips();
+    const lodgingCosts = singleTravelerLodgingCost.reduce(
+      (totalLodging, trip) => {
+        this.destinationsData.forEach((destination) => {
+          if (
+            trip.destinationID === destination.id &&
+            Number(trip.date.split("/")[0]) > 2019
+          ) {
+            totalLodging +=
+              trip.duration * destination.estimatedLodgingCostPerDay;
+          }
+        });
+        return totalLodging;
+      },
+      0
+    );
+    return lodgingCosts;
+  }
+
+  calculateTotalFlightCostPerTripThisYear() {
+    const singleTravelerFlightCost = this.findTravelerTrips();
+    const flightCosts = singleTravelerFlightCost.reduce(
+      (totalFlightCost, trip) => {
+        this.destinationsData.forEach((destination) => {
+          if (
+            trip.destinationID === destination.id &&
+            Number(trip.date.split("/")[0]) > 2019
+          ) {
+            totalFlightCost +=
+              trip.travelers * destination.estimatedFlightCostPerPerson;
+          }
+        });
+
+        return totalFlightCost;
+      },
+      0
+    );
+    // domUpdates.displaySingleFlightCosts(flightCosts)
+    return flightCosts;
+  }
+
+  calculateTotalCostOfTrips(array1, array2) {
+    const totalCostOfTrips = array1 + array2;
+    // domUpdates.displayTotalCostOfTrips(totalCostOfTrips);
+    return totalCostOfTrips;
   }
 
   calculateTravelAgency10PercentFee(num) {
-    return (0.10 * num)
+    return 0.1 * num;
   }
-
-  // createNewTrip{
-    // build object {} here
-  //   ApiFetch(object)
-  // }
-
 }
 
 export default Traveler;

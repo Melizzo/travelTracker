@@ -13,12 +13,37 @@
     <main>
       <section id ="welcome-login-area" class="login-area">
         <span id="login-error" class="login-error-in-message"></span>
-        <input id="login-username-input" class="username-input" value="traveler3" aria-label="enter-username" type="text" required>Login</input>
+        <input id="login-username-input" class="username-input" value="traveler24" aria-label="enter-username" type="text" required>Login</input>
         <input id="login-password-input"  class="password-input" value="travel2020" aria-label="enter-password" type="text" required>Password</input>
         <button id="login-submit-button" aria-label="submit-username-and-password" type="submit">Submit</button>
       </section>
-      <section id="traveler-page" class="hidden"></section>
-      <section id="travel-agency-page" class="hidden"></section>
+      <section id="traveler-page" class="hidden">
+        <header id="traveler-Header" class="display-User-First-Name"></header>
+        <section id="traveler-Cost-Section" class="display-traveler-costs"></section>
+        <h3 id="pending-traveler-trips-section"></h3>
+        <section id="traveler-trips" class="display-traveler-trips">Look at all of your travels:</section>
+        <form id="book-traveler-trip" class="">
+          <input id="destination-Form-ID" class="display-destination-input" aria-label="enter-destination-id" type="text" required>enter destination id</input>
+          <input id="number-travelers-Form-ID" class="display-travelers-input" aria-label="enter-number-of-travelers" min="1" type="number" value= "1" required>enter number of travelers</input>
+          <label for="start">Select the date you want to leave:</label>
+          <input type="date" id="select-date-trip" name="trip-start" value="2020-06-10" min="2020-06-10">
+          <input id="number-days-of-trip-Form" class="display-days-travel-input" aria-label="enter-days-of-trip" type="number" value= "1" required>enter in the amount of days this trip will last</input>
+          <button id="calculate-trip-estimate-button" aria-label="submit-trip" type="submit">Click to review trip</button>
+        </form>
+        <section id="show-traveler-trip" class="hidden">
+          <h3>This is the Confirmation for your upcoming Trip!</h3>
+          <p id="destination-confirmation-trip-section"></p>
+          <p id="date-confirmation-trip-section"></p>
+          <p id="total-travelers-confirmation-trip-section"></p>
+          <p id="estimated-cost-confirmation-trip-section"></p>
+          <button id="post-traveler-trip-button" aria-label="submit-trip" type="submit">Click to purchase!</button>
+        </section>
+      </section>
+
+      <section id="travel-agency-page" class="hidden">
+        <header id="traveler-Header" class="display-User-First-Name">Welcome, Minimalist Travel Agent.</header>
+
+      </section>
     </main>
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->

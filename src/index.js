@@ -10,6 +10,7 @@ import "./images/loginPageTravel.jpg";
 let traveler;
 let travelAgent;
 
+
 // Data Fetching
 function fetchSingleUser(id) {
   return Promise.all([
@@ -18,12 +19,12 @@ function fetchSingleUser(id) {
     ApiFetch.getAllDestinations(),
   ])
     .then((data) => {
+      return data;
+    })
+    .then((data) => {
+      traveler = new Traveler(data[0], data[1].trips, data[2].destinations);
       domUpdates.displayPage();
-      return instantiateSingleTraveler(
-        data[0],
-        data[1].trips,
-        data[2].destinations
-      );
+      domUpdates.displayTravelerInformation(traveler)
     })
     .catch((error) => {
       loginPageError.insertAdjacentHTML(
@@ -40,45 +41,61 @@ function fetchAllTravelers() {
     ApiFetch.getAllDestinations(),
     ApiFetch.getTravelersData(),
   ])
-  .then((data) => {
-    domUpdates.displayPage()
-     return instantiateTravelAgency(
+    .then((data) => {
+      domUpdates.displayPage();
+      travelAgent = new TravelAgency(
         data[0].trips,
         data[1].destinations,
         data[2].travelers
-      )
-     })
+        );
+        console.log(travelAgent);
+        console.log("Hello Travel Agent");
+        domUpdates.displayPage();
+        domUpdates.displayTravelAgentInformation(travelAgent)
+    })
     .catch((error) => console.log(error));
-  }
- 
-
-function instantiateSingleTraveler(
-  singleTraveler,
-  tripsData,
-  destinationsData
-) {
-  traveler = new Traveler(singleTraveler, tripsData, destinationsData);
-  return traveler
-}
-
-function instantiateTravelAgency(tripsData, destinationsData, travelersData) {
-  console.log("Hello Travel Agent");
-  return (travelAgent = new TravelAgency(
-    tripsData,
-    destinationsData,
-    travelersData
-  ));
 }
 
 // QuerySelectors
-const submitButton = document.querySelector("#login-submit-button");
 const loginPageError = document.querySelector("#login-error");
+document.getElementById('login-submit-button').addEventListener('click', logIn)
 
-// Event Listeners
-submitButton.addEventListener("click", logIn);
+document.addEventListener('click', (e) => {
+  if(e.target.id === 'calculate-trip-estimate-button') {
+    e.preventDefault()
+    const trip = tentativeTrip()
+    domUpdates.displayTentativeTrip(trip, traveler.destinationsData)
+  }
+  if(e.target.id === 'post-traveler-trip-button') {
+    const tripObject = tentativeTrip();
+    console.log('tripObject', tripObject);
+    ApiFetch.postNewTrip(tripObject)
+    .then(() => Api.getAllTrips()) 
+    .then(response => {
+      console.log(response)
+      domUpdates.displayBookTripForm()
+      displayTravelerInformation(traveler)
+    })
+    .catch(err => console.log(err))
+  }
+})
+
+function tentativeTrip() {
+   const trip = {
+    id: Date.now(),
+    userID: traveler.travelerData.id,
+    destinationID: +document.getElementById('destination-Form-ID').value,
+    travelers: +document.getElementById('number-travelers-Form-ID').value, 
+    date: document.getElementById('select-date-trip').value.split('-').join('/'),
+    duration: +document.getElementById('number-days-of-trip-Form').value,
+    status: 'pending',
+    suggestedActivities: []
+  }
+  console.log('tentativeTrip()', trip);
+  return trip
+}
 
 function logIn(e) {
-  console.log("submit Btn", e);
   const loginValid = validateLoginInformation();
   if (loginValid) {
     findUserName();
@@ -97,16 +114,20 @@ function validateLoginInformation() {
 }
 
 function findUserName() {
+  if(document.querySelector("#login-username-input").value === ""){
+    return loginPageError.insertAdjacentHTML(
+      "beforebegin",
+      "<p>Please enter in a login</p>"
+    );
+  }
   if (document.querySelector("#login-username-input").value === "manager") {
     fetchAllTravelers({});
   } else {
-    const travelerId = Number(
-      document
-        .querySelector("#login-username-input")
-        .value.split("")
-        .splice(8)
-        .join()
-    );
+    const travelerId = document
+      .querySelector("#login-username-input")
+      .value.split("")
+      .filter((char) => !isNaN(char + 1))
+      .join("");
     fetchSingleUser(travelerId);
   }
 }
@@ -117,4 +138,3 @@ function validatePassword() {
   }
   return true;
 }
-
