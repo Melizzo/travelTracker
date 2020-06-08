@@ -10,6 +10,7 @@ let domUpdates = {
       welcomePage.classList.add("hidden");
       welcomePage.classList.remove("login-area");
       travelAgencyPage.classList.remove("hidden");
+      travelAgencyPage.classList.add('travel-agent-login-page')
     } else {
       welcomePage.classList.add("hidden");
       welcomePage.classList.remove("login-area");
@@ -19,6 +20,11 @@ let domUpdates = {
   },
   displayTravelAgentInformation(travelAgent) {
     console.log(`This is the page for the Travel Agent`);
+  },
+
+  displayBookTripForm() {
+    document.getElementById("book-traveler-trip").classList.remove("hidden");
+    document.getElementById("show-traveler-trip").classList.add("hidden");
   },
 
   displayTentativeTrip(trip, destinationsData) {
@@ -58,7 +64,7 @@ let domUpdates = {
     const singleTravelerDestinations = traveler.findDestinationsOfTravelersTrips();
     singleTravelerTrips.forEach((trip) => {
       singleTravelerDestinations.forEach((destination) => {
-        if (trip.destinationID === destination.id && Number(trip.date.split("/")[0]) > 2019 && trip.status !== 'pending') {
+        if (trip.destinationID === destination.id && Number(trip.date.split("/")[0]) <= 2020 && trip.status !== 'pending') {
           document.getElementById("traveler-trips").insertAdjacentHTML(
             "beforeend",
             `<p>Location: ${destination.destination}<p>
@@ -74,20 +80,22 @@ let domUpdates = {
 
   displayTravelerPendingTrips(traveler){
     const pendingTrips = traveler.findPendingTrips()
-    // console.log('domUpdates pendingTrips', pendingTrips);
-    
+    const destinations = traveler.findDestinationsOfTravelersTrips()
     if(pendingTrips.length === 0){
       document.getElementById('pending-traveler-trips-section').insertAdjacentHTML(
         "afterbegin", `<p>There are no pending trips. Book a trip below!</p>`) 
     } 
     else {
       pendingTrips.forEach(trip => {
-        console.log(trip);
-        
-        document.getElementById('pending-traveler-trips-section').insertAdjacentHTML(
-          "afterbegin", `<p>${trip.destinationID}${trip.id}</p>`) 
+        destinations.forEach(destination => {
+          if(trip.destinationID === destination.id) {
+            document.getElementById('pending-traveler-trips-section').insertAdjacentHTML(
+              "afterbegin", `<h3>Your Pending Trip/s:</h3>
+              <p>Location: ${destination.destination}</p><p>Total Travelers: ${trip.travelers}<p>
+              <p>Trip begins on: ${trip.date}, and will last for ${trip.duration} days!<p>`) 
+          }
+        })
       })
-      
     }
   },
 

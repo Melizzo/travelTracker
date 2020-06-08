@@ -105,6 +105,14 @@ main {
       margin-top: 2em;
 }
 
-.img {
-  @include height-and-width(50%, 50%)
+
+.travel-agent-login-page {
+  @include flex-container(space-evenly);
+  flex-direction: row;
+  color: white;
+  @include height-and-width(100%, 80%);
+  margin: 2em;
+  background-color: rgba(50, 46, 46, 0.906);
+  z-index: 100;
+  overflow: scroll;
 }

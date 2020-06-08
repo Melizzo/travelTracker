@@ -68,12 +68,13 @@ document.addEventListener('click', (e) => {
   }
   if(e.target.id === 'post-traveler-trip-button') {
     const tripObject = tentativeTrip();
-    // console.log('tripObject', tripObject);
-    
+    console.log('tripObject', tripObject);
     ApiFetch.postNewTrip(tripObject)
-    .then(() => getAllTrips()) 
+    .then(() => Api.getAllTrips()) 
     .then(response => {
       console.log(response)
+      domUpdates.displayBookTripForm()
+      displayTravelerInformation(traveler)
     })
     .catch(err => console.log(err))
   }
@@ -90,7 +91,7 @@ function tentativeTrip() {
     status: 'pending',
     suggestedActivities: []
   }
-  // console.log('tentativeTrip()', trip);
+  console.log('tentativeTrip()', trip);
   return trip
 }
 

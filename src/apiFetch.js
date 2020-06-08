@@ -35,6 +35,7 @@ let ApiFetch = {
       headers: {
         'Content-Type': 'application/json'
       },
+      //error Uncaught TypeError: JSON.stringify(...) is not a function
         body: JSON.stringify(bookedTrip) ({
       })
       .then(response => {
