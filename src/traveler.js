@@ -52,7 +52,7 @@ class Traveler {
 
   findPendingTrips() {
     const travelersTrips = this.findTravelerTrips();
-    const pendingTrips = travelersTrips.filter(trips => trips.status === 'pending')
+    const pendingTrips = travelersTrips.filter(trip => trip.status === 'pending')
     return pendingTrips
   }
 
@@ -73,7 +73,6 @@ class Traveler {
       },
       0
     );
-    // domUpdates.displaySingleLodgingCosts(lodgingCosts)
     return lodgingCosts;
   }
 

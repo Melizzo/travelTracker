@@ -73,7 +73,8 @@ main {
       @include height-and-width(8%, 100%);
       display: block;
       color: white;
-      padding-left: 1em;
+      padding-left: .5em;
+      padding-bottom: 1em;
     }
     // h4 {
     //   @include height-and-width(4%, 100%);

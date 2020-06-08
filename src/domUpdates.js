@@ -17,6 +17,9 @@ let domUpdates = {
       travelerPage.classList.add("traveler-login-page");
     }
   },
+  displayTravelAgentInformation(travelAgent) {
+    console.log(`This is the page for the Travel Agent`);
+  },
 
   displayTentativeTrip(trip, destinationsData) {
     const destination = destinationsData.find(
@@ -55,7 +58,7 @@ let domUpdates = {
     const singleTravelerDestinations = traveler.findDestinationsOfTravelersTrips();
     singleTravelerTrips.forEach((trip) => {
       singleTravelerDestinations.forEach((destination) => {
-        if (trip.destinationID === destination.id) {
+        if (trip.destinationID === destination.id && Number(trip.date.split("/")[0]) > 2019 && trip.status !== 'pending') {
           document.getElementById("traveler-trips").insertAdjacentHTML(
             "beforeend",
             `<p>Location: ${destination.destination}<p>
@@ -66,6 +69,26 @@ let domUpdates = {
       });
     });
     this.displayTravelerTotalCostFor2020(traveler);
+    this.displayTravelerPendingTrips(traveler);
+  },
+
+  displayTravelerPendingTrips(traveler){
+    const pendingTrips = traveler.findPendingTrips()
+    // console.log('domUpdates pendingTrips', pendingTrips);
+    
+    if(pendingTrips.length === 0){
+      document.getElementById('pending-traveler-trips-section').insertAdjacentHTML(
+        "afterbegin", `<p>There are no pending trips. Book a trip below!</p>`) 
+    } 
+    else {
+      pendingTrips.forEach(trip => {
+        console.log(trip);
+        
+        document.getElementById('pending-traveler-trips-section').insertAdjacentHTML(
+          "afterbegin", `<p>${trip.destinationID}${trip.id}</p>`) 
+      })
+      
+    }
   },
 
   displayTravelerTotalCostFor2020(traveler) {

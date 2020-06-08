@@ -43,22 +43,17 @@ function fetchAllTravelers() {
   ])
     .then((data) => {
       domUpdates.displayPage();
-      return instantiateTravelAgency(
+      travelAgent = new TravelAgency(
         data[0].trips,
         data[1].destinations,
         data[2].travelers
-      );
+        );
+        console.log(travelAgent);
+        console.log("Hello Travel Agent");
+        domUpdates.displayPage();
+        domUpdates.displayTravelAgentInformation(travelAgent)
     })
     .catch((error) => console.log(error));
-}
-
-function instantiateTravelAgency(tripsData, destinationsData, travelersData) {
-  console.log("Hello Travel Agent");
-  return (travelAgent = new TravelAgency(
-    tripsData,
-    destinationsData,
-    travelersData
-  ));
 }
 
 // QuerySelectors
@@ -73,6 +68,8 @@ document.addEventListener('click', (e) => {
   }
   if(e.target.id === 'post-traveler-trip-button') {
     const tripObject = tentativeTrip();
+    // console.log('tripObject', tripObject);
+    
     ApiFetch.postNewTrip(tripObject)
     .then(() => getAllTrips()) 
     .then(response => {
@@ -81,10 +78,6 @@ document.addEventListener('click', (e) => {
     .catch(err => console.log(err))
   }
 })
-
-function travelerPageHandler() {
-  // traveler.calculateTotalCostOfTrips(traveler.calculateTotalLodgingCostPerTripThisYear(traveler.findTravelerTrips()), traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips()));
-}
 
 function tentativeTrip() {
    const trip = {
@@ -97,7 +90,7 @@ function tentativeTrip() {
     status: 'pending',
     suggestedActivities: []
   }
-  console.log(trip);
+  // console.log('tentativeTrip()', trip);
   return trip
 }
 
@@ -120,6 +113,12 @@ function validateLoginInformation() {
 }
 
 function findUserName() {
+  if(document.querySelector("#login-username-input").value === ""){
+    return loginPageError.insertAdjacentHTML(
+      "beforebegin",
+      "<p>Please enter in a login</p>"
+    );
+  }
   if (document.querySelector("#login-username-input").value === "manager") {
     fetchAllTravelers({});
   } else {
