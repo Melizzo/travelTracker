@@ -50,6 +50,12 @@ class Traveler {
     return result;
   }
 
+  findPendingTrips() {
+    const travelersTrips = this.findTravelerTrips();
+    const pendingTrips = travelersTrips.filter(trips => trips.status === 'pending')
+    return pendingTrips
+  }
+
   calculateTotalLodgingCostPerTripThisYear() {
     const singleTravelerLodgingCost = this.findTravelerTrips();
     const lodgingCosts = singleTravelerLodgingCost.reduce(

@@ -53,9 +53,9 @@ let tripsData = [{
     "userID": 1,
     "destinationID": 5,
     "travelers": 1,
-    "date": "2019/06/04",
+    "date": "2019/06/15",
     "duration": 8,
-    "status": "approved",
+    "status": "pending",
     "suggestedActivities": []
     }
 ]

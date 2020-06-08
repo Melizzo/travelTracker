@@ -81,9 +81,9 @@ let traveler;
         "userID": 1,
         "destinationID": 5,
         "travelers": 1,
-        "date": "2019/06/04",
+        "date": "2019/06/15",
         "duration": 8,
-        "status": "approved",
+        "status": "pending",
         "suggestedActivities": []
         }
     ])
@@ -106,6 +106,19 @@ let traveler;
       image: 'https://images.unsplash.com/photo-1543785734-4b6e564642f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
       alt: 'city with clear skys and a road in the day time'
     }])
+  })
+
+  it('should be able to find pending trips', function() {
+     expect(traveler.findPendingTrips()).to.deep.equal([{
+      "id": 1,
+      "userID": 1,
+      "destinationID": 5,
+      "travelers": 1,
+      "date": "2019/06/15",
+      "duration": 8,
+      "status": "pending",
+      "suggestedActivities": []
+      }])
   })
 
   it('should be able to total the cost of all the travel\'s lodging per trip', function() {
