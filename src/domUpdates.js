@@ -41,10 +41,9 @@ let domUpdates = {
         destinations.forEach(destination => {
           if(trip.destinationID === destination.id) {
             document.getElementById('travel-agency-all-pending-trips').insertAdjacentHTML(
-              "afterbegin", `<h3>Pending Trip's that need approval:</h3>
-              <p>Trip Booking id: ${trip.id} for Traveler id: ${trip.userID} </p>
+              "beforeend", `<p>Trip Booking id: ${trip.id} for Traveler id: ${trip.userID} </p>
               <p>Location: ${destination.destination}</p><p>Total Travelers: ${trip.travelers}<p>
-              <p>Trip begins on: ${trip.date}, and will last for ${trip.duration} days!<p>`) 
+              <p>Trip starts: ${trip.date}, for ${trip.duration} days.<p>`) 
           }
         })
       })
@@ -58,7 +57,16 @@ let domUpdates = {
     document.getElementById("show-traveler-trip").classList.add("hidden");
   },
 
+  validateDestinationID(){
+    const destinationID = +document.getElementById('destination-Form-ID').value
+    if((destinationID < 1 || destinationID >50) && destinationID === Nan) {
+      document.getElementById('destination-Form-ID').insertAdjacentHTML('beforebegin', `<p>That is an incorrect destination id, try again.</p>`)
+    }
+    
+  },
+
   displayTentativeTrip(trip, destinationsData) {
+    document.getElementById('destination-Form-ID').addEventListener('keyup', this.validateDestinationID)
     const destination = destinationsData.find(
       (destination) => destination.id === trip.destinationID
     );

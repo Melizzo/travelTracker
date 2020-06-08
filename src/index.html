@@ -23,7 +23,7 @@
         <h3 id="pending-traveler-trips-section"></h3>
         <section id="traveler-trips" class="display-traveler-trips">Look at all of your travels:</section>
         <form id="book-traveler-trip" class="">
-          <input id="destination-Form-ID" class="display-destination-input" aria-label="enter-destination-id" type="text" required>enter destination id</input>
+          <input id="destination-Form-ID" class="display-destination-input" aria-label="enter-destination-id" type="text" min="1" max="50" required>enter destination id</input>
           <input id="number-travelers-Form-ID" class="display-travelers-input" aria-label="enter-number-of-travelers" min="1" type="number" value= "1" required>enter number of travelers</input>
           <label for="start">Select the date you want to leave:</label>
           <input type="date" id="select-date-trip" name="trip-start" value="2020-06-10" min="2020-06-10">
@@ -42,7 +42,9 @@
 
       <section id="travel-agency-page" class="hidden">
         <header id="travel-agency-Header" class="display-User-First-Name">Welcome, Minimalist Travel Agent.</header>
-        <section id="travel-agency-all-pending-trips"></section>
+        <section id="travel-agency-all-pending-trips-section" class="display-all-pending-trips-section">
+          <h3 id="travel-agency-all-pending-trips">Pending Trip's that need approval:</h3>
+        </section>
 
       </section>
     </main>

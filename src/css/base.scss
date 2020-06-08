@@ -114,4 +114,19 @@ main {
   background-color: rgba(50, 46, 46, 0.906);
   z-index: 100;
   overflow: scroll;
+  h3, h2 {
+    @include height-and-width(8%, 100%);
+    display: block;
+    color: white;
+    padding-left: .5em;
+    padding-bottom: 1em;
+  }
+    p {
+      display: inline;
+      color: white;
+      padding-left: 1em;
+    }
+}
+.display-all-pending-trips-section {
+  @include height-and-width(100%, 30%);
 }
