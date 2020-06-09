@@ -10,7 +10,6 @@ import "./images/loginPageTravel.jpg";
 let traveler;
 let travelAgent;
 
-
 // Data Fetching
 function fetchSingleUser(id) {
   return Promise.all([
@@ -24,7 +23,7 @@ function fetchSingleUser(id) {
     .then((data) => {
       traveler = new Traveler(data[0], data[1].trips, data[2].destinations);
       domUpdates.displayPage();
-      domUpdates.displayTravelerInformation(traveler)
+      domUpdates.displayTravelerInformation(traveler);
     })
     .catch((error) => {
       loginPageError.insertAdjacentHTML(
@@ -48,82 +47,93 @@ function fetchAllTravelers() {
         data[0].trips,
         data[1].destinations,
         data[2].travelers
-        );
-        console.log(travelAgent);
-        console.log("Hello Travel Agent");
-        domUpdates.displayPage();
-        domUpdates.displayTravelAgentInformation(travelAgent)
+      );
+      console.log(travelAgent);
+      console.log("Hello Travel Agent");
+      domUpdates.displayPage();
+      domUpdates.displayTravelAgentInformation(travelAgent);
     })
     .catch((error) => console.log(error));
 }
 
 // QuerySelectors
 const loginPageError = document.querySelector("#login-error");
-document.getElementById('login-submit-button').addEventListener('click', logIn)
+document.getElementById("login-submit-button").addEventListener("click", logIn);
 
-document.addEventListener('click', (e) => {
-  if(e.target.id === 'calculate-trip-estimate-button') {
-    e.preventDefault()
-    const trip = tentativeTrip()
-    domUpdates.displayTentativeTrip(trip, traveler.destinationsData)
+document.addEventListener("click", (e) => {
+  if (e.target.id === "calculate-trip-estimate-button") {
+    e.preventDefault();
+    const trip = tentativeTrip();
+    domUpdates.displayTentativeTrip(trip, traveler.destinationsData);
   }
-  if(e.target.id === 'post-traveler-trip-button') {
+  if (e.target.id === "post-traveler-trip-button") {
     const tripObject = tentativeTrip();
     ApiFetch.postNewTrip(tripObject)
-    .then(() => ApiFetch.getAllTrips()) 
-    .then(response => {
-      console.log(response)
-      domUpdates.displayBookTripForm()
-      domUpdates.displayTravelerInformation(traveler)
-    })
-    .catch(err => console.log(err))
+      .then(() => ApiFetch.getAllTrips())
+      .then((response) => {
+        console.log(response);
+        domUpdates.displayBookTripForm();
+        domUpdates.displayTravelerInformation(traveler);
+      })
+      .catch((err) => console.log(err));
   }
-  if(e.target.id === 'approve-trip-button') {
-    e.preventDefault()
+  if (e.target.id === "approve-trip-button") {
+    e.preventDefault();
     ApiFetch.modifySingleTrip({
-      id: +document.getElementById('travel-agency-approve-trip').value,
+      id: +document.getElementById("travel-agency-approve-trip").value,
       status: "approved",
-      suggestedActivities: []
+      suggestedActivities: [],
     })
-    .then(response => {
-      console.log(response)
-      alert('Trip has been approved!')
-      domUpdates.displayAllPendingTravelersTrip(travelAgent)
-    })
-    .catch(err => {
-      console.log(err)
-      alert('Error - trip id not found!')
-    })
+      .then((response) => {
+        console.log(response);
+        alert("Trip has been approved!");
+        domUpdates.displayAllPendingTravelersTrip(travelAgent);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Error - trip id not found!");
+      });
   }
-    if(e.target.id === 'delete-trip-button') {
-      e.preventDefault()
-      ApiFetch.deleteSingleTrip({
-        id: +document.getElementById('travel-agency-delete-trip').value,
+  if (e.target.id === "delete-trip-button") {
+    e.preventDefault();
+    ApiFetch.deleteSingleTrip({
+      id: +document.getElementById("travel-agency-delete-trip").value,
+    })
+      .then((response) => {
+        console.log(response);
+        alert("Trip has been deleted.");
+        domUpdates.displayAllPendingTravelersTrip(travelAgent);
       })
-      .then(response => {
-        console.log(response)
-        alert('Trip has been deleted.')
-        domUpdates.displayAllPendingTravelersTrip(travelAgent)
-      })
-      .catch(err => {
-        console.log(err)
-        alert('Error - trip id not found!')
-      })
+      .catch((err) => {
+        console.log(err);
+        alert("Error - trip id not found!");
+      });
   }
-})
+  if (e.target.id === 'search-for-traveler') {
+    let name = document.getElementById('search-traveler-name-travel-agent').value
+    name = travelAgent.findSingleTraveler(name)
+    traveler = fetchSingleUser(name.id)
+    console.log(traveler);
+    // promise {pending}
+    domUpdates.displaySearchedTraveler(name)
+  }
+});
 
 function tentativeTrip() {
-   const trip = {
+  const trip = {
     id: Date.now(),
     userID: traveler.travelerData.id,
-    destinationID: +document.getElementById('destination-Form-ID').value,
-    travelers: +document.getElementById('number-travelers-Form-ID').value, 
-    date: document.getElementById('select-date-trip').value.split('-').join('/'),
-    duration: +document.getElementById('number-days-of-trip-Form').value,
-    status: 'pending',
-    suggestedActivities: []
-  }
-  return trip
+    destinationID: +document.getElementById("destination-Form-ID").value,
+    travelers: +document.getElementById("number-travelers-Form-ID").value,
+    date: document
+      .getElementById("select-date-trip")
+      .value.split("-")
+      .join("/"),
+    duration: +document.getElementById("number-days-of-trip-Form").value,
+    status: "pending",
+    suggestedActivities: [],
+  };
+  return trip;
 }
 
 function logIn(e) {
@@ -145,7 +155,7 @@ function validateLoginInformation() {
 }
 
 function findUserName() {
-  if(document.querySelector("#login-username-input").value === ""){
+  if (document.querySelector("#login-username-input").value === "") {
     return loginPageError.insertAdjacentHTML(
       "beforebegin",
       "<p>Please enter in a login</p>"

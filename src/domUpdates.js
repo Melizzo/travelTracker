@@ -59,7 +59,10 @@ let domUpdates = {
     } 
   },
   
-
+  displaySearchedTraveler(traveler) {
+    const firstName = traveler.findTravelerFirstName()
+    console.log(firstName);
+  },
   // searchTravelers(name) {
   //   const foundTraveler = travelAgent.findSingleTraveler(name);
   //   // use the found the traveler to get each piece of the data

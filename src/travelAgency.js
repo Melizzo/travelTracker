@@ -33,7 +33,6 @@ class TravelAgency extends Traveler {
     }, 0)
   }
   
-
   findAllPendingTrips() {
     return this.tripsData.filter(trip => trip.status === 'pending');
   }
@@ -51,7 +50,13 @@ class TravelAgency extends Traveler {
 
   findSingleTraveler(name) {
     const lowerCaseName = name.toLowerCase()
-    return this.travelersData.find(traveler => traveler.name.toLowerCase().includes(lowerCaseName))
+    const travelerFound = this.travelersData.find(traveler => traveler.name.toLowerCase().includes(lowerCaseName))
+    if(!travelerFound) {
+      alert('Traveler not found!')
+    }
+    console.log(travelerFound);
+    
+    return travelerFound
   }
 }
 

@@ -46,19 +46,18 @@
         </section>
         <div class="wrap">
           <div class="search">
-             <input type="text" class="searchTerm" placeholder="Type in a travelers name">
-             <button type="submit" class="searchButton">
-               <i class="travel-agent-search"></i>
-            </button>
+             <input id="search-traveler-name-travel-agent"type="text" class="searchTerm" placeholder="Type in a travelers name"></input>
+             <button id="search-for-traveler" type="submit" class="searchButton">Submit</button>
+             <span id="display-found-traveler"></span>
           </div>
        </div>
         <form id="travel-agency-approve-trip-form" class="modify-trip-form">
-          <input id="travel-agency-approve-trip" class="approve-trip-button" aria-label="trip-id" type="text" required>enter tripID to approve</input>
+          <input id="travel-agency-approve-trip" class="approve-trip-button" placeholder="Enter travelers trip id to approve" aria-label="trip-id" type="text" required></input>
           <span id="approved-confirmation"></span>
           <button id="approve-trip-button" aria-label="approve-trip" type="submit">Click to approve!</button>
         </form>
         <form id="travel-agency-delete-trip-ID" class="delete-trip-form">
-          <input id="travel-agency-delete-trip" class="delete-trip-button" aria-label="delete-trip-id" type="text" required>enter tripID to delete</input>
+          <input id="travel-agency-delete-trip" class="delete-trip-button" placeholder="Enter travelers trip id to delete" aria-label="delete-trip-id" type="text" required></input>
           <button id="delete-trip-button" aria-label="delete-trip" type="submit">Click to delete</button>
         </form>
 
