@@ -13,7 +13,7 @@
     <main>
       <section id ="welcome-login-area" class="login-area">
         <span id="login-error" class="login-error-in-message"></span>
-        <input id="login-username-input" class="username-input" value="traveler24" aria-label="enter-username" type="text" required>Login</input>
+        <input id="login-username-input" class="username-input" value="manager" aria-label="enter-username" type="text" required>Login</input>
         <input id="login-password-input"  class="password-input" value="travel2020" aria-label="enter-password" type="text" required>Password</input>
         <button id="login-submit-button" aria-label="submit-username-and-password" type="submit">Submit</button>
       </section>
@@ -39,16 +39,30 @@
           <button id="post-traveler-trip-button" aria-label="submit-trip" type="submit">Click to purchase!</button>
         </section>
       </section>
-
       <section id="travel-agency-page" class="hidden">
         <header id="travel-agency-Header" class="display-User-First-Name">Welcome, Minimalist Travel Agent.</header>
         <section id="travel-agency-all-pending-trips-section" class="display-all-pending-trips-section">
           <h3 id="travel-agency-all-pending-trips">Pending Trip's that need approval:</h3>
         </section>
+        <div class="wrap">
+          <div class="search">
+             <input type="text" class="searchTerm" placeholder="Type in a travelers name">
+             <button type="submit" class="searchButton">
+               <i class="travel-agent-search"></i>
+            </button>
+          </div>
+       </div>
+        <form id="travel-agency-approve-trip-form" class="modify-trip-form">
+          <input id="travel-agency-approve-trip" class="approve-trip-button" aria-label="trip-id" type="text" required>enter tripID to approve</input>
+          <span id="approved-confirmation"></span>
+          <button id="approve-trip-button" aria-label="approve-trip" type="submit">Click to approve!</button>
+        </form>
+        <form id="travel-agency-delete-trip-ID" class="delete-trip-form">
+          <input id="travel-agency-delete-trip" class="delete-trip-button" aria-label="delete-trip-id" type="text" required>enter tripID to delete</input>
+          <button id="delete-trip-button" aria-label="delete-trip" type="submit">Click to delete</button>
+        </form>
 
       </section>
     </main>
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>

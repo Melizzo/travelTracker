@@ -69,7 +69,6 @@ document.addEventListener('click', (e) => {
   }
   if(e.target.id === 'post-traveler-trip-button') {
     const tripObject = tentativeTrip();
-    console.log('tripObject', tripObject);
     ApiFetch.postNewTrip(tripObject)
     .then(() => ApiFetch.getAllTrips()) 
     .then(response => {
@@ -79,7 +78,49 @@ document.addEventListener('click', (e) => {
     })
     .catch(err => console.log(err))
   }
+  if(e.target.id === 'approve-trip-button') {
+    e.preventDefault()
+    ApiFetch.modifySingleTrip({
+      id: +document.getElementById('travel-agency-approve-trip').value,
+      status: "approved",
+      suggestedActivities: []
+    })
+    .then(response => {
+      console.log(response)
+      alert('Trip has been approved!')
+      domUpdates.displayAllPendingTravelersTrip(travelAgent)
+    })
+    .catch(err => {
+      console.log(err)
+      alert('Error - trip id not found!')
+    })
+    if(e.target.id === 'delete-trip-button') {
+      e.preventDefault()
+      ApiFetch.deleteSingleTrip({
+        id: +document.getElementById('delete-trip-button').value,
+        status: "approved",
+        suggestedActivities: []
+      })
+      .then(response => {
+        console.log(response)
+        alert('Trip has been approved!')
+        domUpdates.displayAllPendingTravelersTrip(travelAgent)
+      })
+      .catch(err => {
+        console.log(err)
+        alert('Error - trip id not found!')
+      })
+  }
 })
+function modifyTrip() {
+  console.log(+document.getElementById('travel-agency-approve-trip').value)
+  const trip = {
+    id: +document.getElementById('travel-agency-approve-trip').value,
+    status: "approved",
+    suggestedActivities: []
+  }
+  return trip
+}
 
 function tentativeTrip() {
    const trip = {
@@ -92,7 +133,6 @@ function tentativeTrip() {
     status: 'pending',
     suggestedActivities: []
   }
-  console.log('tentativeTrip()', trip);
   return trip
 }
 

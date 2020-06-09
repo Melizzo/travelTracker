@@ -21,6 +21,7 @@ class Traveler {
 
   findTravelerFirstName() {
     const firstName = this.travelerData.name.split(" ")[0];
+    // domuoaer
     return firstName;
   }
 
