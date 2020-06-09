@@ -4,7 +4,6 @@ import moment from 'moment';
 class TravelAgency extends Traveler {
   constructor(travelerData, tripsData, destinationsData, travelersData) {
     super(travelerData, tripsData, destinationsData); 
-    // this.travelerData = []
     this.travelersData = this.checkIfDataIsArray(travelersData)
     this.todaysDate = moment().format('YYYY/MM/DD')
   }
@@ -36,7 +35,7 @@ class TravelAgency extends Traveler {
   findAllPendingTrips() {
     return this.tripsData.filter(trip => trip.status === 'pending');
   }
-
+  
   findTotalNumTravelersCurrentlyOnATrip() {
     const travelers = this.tripsData.reduce((totalTravelers, trip) => {
       trip.date === this.todaysDate ? totalTravelers.push(trip) : null
@@ -54,9 +53,25 @@ class TravelAgency extends Traveler {
     if(!travelerFound) {
       alert('Traveler not found!')
     }
-    console.log(travelerFound);
-    
-    return travelerFound
+    const tripsData = this.tripsData.filter((trip) => {
+      if (trip.userID === travelerFound.id) {
+        return trip;
+      }
+    });
+
+    const destinationData = this.destinationsData.reduce((acc, destination) => {
+      tripsData.forEach((trip) => {
+        if (
+          destination.id === trip.destinationID &&
+          !acc.includes(destination)
+        ) {
+          acc.push(destination);
+        }
+      });
+      return acc;
+    }, []);
+    return {travelerFound, tripsData, destinationData}
+
   }
 }
 

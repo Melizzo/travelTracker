@@ -53,16 +53,22 @@ main {
 
 // Traveler login Page
 .traveler-login-page {
-  @include flex-container(center);
-  flex-direction: column;
-  color: white;
-  @include height-and-width(80%, 50%);
-  margin: 2em;
+  @include flex-container(space-evenly);
+  @include height-and-width(100%, 50%);
   background-color: rgba(50, 46, 46, 0.906);
-  z-index: 100;
+  color: white;
+  flex-direction: column;
+  margin: 2em;
   overflow: scroll;
+  z-index: 100;
+  // .traveler-header-page {
+  //   // @include height-and-width(10%, 100%)
+  // }
+  // .display-traveler-trips{
+  //   // @include height-and-width(60%, 100%)
+  // }
   input {
-    @include height-and-width(10%, 100%);
+    // @include height-and-width(10%, 100%);
     border-bottom: 1px solid gray;
     border-radius: 1px;
     font: rgb(82, 76, 76);
@@ -70,23 +76,24 @@ main {
   }
   h3,
   h2 {
-    @include height-and-width(8%, 100%);
+    // @include height-and-width(8%, 100%);
     display: block;
     color: white;
+    size: .5em;
     padding-left: 0.5em;
     padding-bottom: 1em;
   }
-  // h4 {
-  //   @include height-and-width(4%, 100%);
-  //   display: block;
-  //   color: white;
-  //   padding-left: 1em;
-  // }
+  img {
+    @include height-and-width(30%, 30%)
+  }
   p {
     display: inline;
-    color: white;
+    font-size: 1.5em;
     padding-left: 1em;
   }
+  // button {
+  //   // @include height-and-width(10%, 100%)
+  // }
 }
 
 .display-traveler-costs {

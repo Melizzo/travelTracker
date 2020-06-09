@@ -59,40 +59,27 @@ let domUpdates = {
     } 
   },
   
-  displaySearchedTraveler(traveler) {
-    const firstName = traveler.findTravelerFirstName()
-    console.log(firstName);
+  displaySearchedTraveler(traveler, travelAgent) {
+    document.getElementById(
+      "display-found-traveler"
+    ).insertAdjacentHTML('afterbegin',`<h3>Traveler: ${traveler.travelerData.name}</h3>`;
+    const totalCost = traveler.calculateTotalCostOfAllTrips(traveler)
+    const agentCut = traveler.calculateTravelAgency10PercentFee(totalCost)
+    document.getElementById(
+      "display-found-traveler"
+    ).innerText = `Total Spent: ${totalCost}, which generated $${agentCut} in revenue`;
+    traveler.tripsData.forEach(trip => {
+      traveler.destinationsData.forEach(destination => {
+        if(trip.destinationID === destination.id) {
+          document.getElementById("display-found-traveler-trips").insertAdjacentHTML('afterbegin', `<p>
+          Trip Booking id: ${trip.id}
+          Location: ${destination.destination} Total Travelers: ${trip.travelers}
+          Trip starts: ${trip.date}, for ${trip.duration} days.</p>`)
+        }
+      })
+    })
   },
-  // searchTravelers(name) {
-  //   const foundTraveler = travelAgent.findSingleTraveler(name);
-  //   // use the found the traveler to get each piece of the data
-  //   // instaniate the new traveler
-  //   this.travelerData = [foundTraveler]
-  //   console.log(foundTraveler);
   
-  //   const newTraveller = new Traveler(foundTraveler.travelerData, foundTraveler.tripsData, foundTraveler.destinationsData);
-  //   console.log(newTraveller);
-    
-        // have different functions to find the data for each traveler, ie find trips,
-        // those functions would go in as arguments into the new traveler instanitation
-        
-
-  //   // console.log('SearchedTravelerData', this.travelerData);
-  //   // this.tripsData = this.findTravelerTrips()
-  //   // console.log(this.findTravelerTrips());
-  //   // const totalLodgingCost = this.calculateTotalLodgingCost()
-  //   // console.log('single traveler lodging', this.calculateTotalLodgingCost());
-  //   // const totalFlightCost = this.calculateTotalFlightsCost()
-  //   // console.log('single traveler flights', this.calculateTotalFlightsCost());
-  //   // const totalCost = this.calculateTotalCostOfTrips(totalLodgingCost, totalFlightCost)
-  //   // console.log('total cost', this.calculateTotalCostOfTrips(totalLodgingCost, totalFlightCost));
-  //   // const agencyCut = this.calculateTravelAgency10PercentFee(totalCost)
-  //   // console.log(agencyCut);
-    
-  //   // const totalTravelerData = [...this.travelerData,...this.tripsData]
-  //   // console.log(totalTravelerData);
-  // }
-
 // Traveler
   displayBookTripForm() {
     document.getElementById("book-traveler-trip").classList.remove("hidden");
@@ -149,7 +136,8 @@ let domUpdates = {
             "beforeend",
             `<p>Location: ${destination.destination}<p>
           <p>Total Travelers: ${trip.travelers}<p>
-          <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>`
+          <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>
+          <img id="destination-image" src="${destination.image}" alt="${destination.alt}">`
           );
         }
       });
