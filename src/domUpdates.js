@@ -59,16 +59,25 @@ let domUpdates = {
     } 
   },
   
-  displaySearchedTraveler(traveler) {
-    console.log(traveler);
+  displaySearchedTraveler(traveler, travelAgent) {
     document.getElementById(
       "display-found-traveler"
-    ).innerHTML = `<h2>Traveler: ${traveler.travelerData.name} 's</h2>`;
+    ).insertAdjacentHTML('afterbegin',`<h3>Traveler: ${traveler.travelerData.name}</h3>`;
     const totalCost = traveler.calculateTotalCostOfAllTrips(traveler)
     const agentCut = traveler.calculateTravelAgency10PercentFee(totalCost)
     document.getElementById(
       "display-found-traveler"
-    ).innerText = `Total Spent: ${totalCost}, which generated ${agentCut} in revenue`;
+    ).innerText = `Total Spent: ${totalCost}, which generated $${agentCut} in revenue`;
+    traveler.tripsData.forEach(trip => {
+      traveler.destinationsData.forEach(destination => {
+        if(trip.destinationID === destination.id) {
+          document.getElementById("display-found-traveler-trips").insertAdjacentHTML('afterbegin', `<p>
+          Trip Booking id: ${trip.id}
+          Location: ${destination.destination} Total Travelers: ${trip.travelers}
+          Trip starts: ${trip.date}, for ${trip.duration} days.</p>`)
+        }
+      })
+    })
   },
   
 // Traveler

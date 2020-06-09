@@ -35,7 +35,7 @@ class TravelAgency extends Traveler {
   findAllPendingTrips() {
     return this.tripsData.filter(trip => trip.status === 'pending');
   }
-
+  
   findTotalNumTravelersCurrentlyOnATrip() {
     const travelers = this.tripsData.reduce((totalTravelers, trip) => {
       trip.date === this.todaysDate ? totalTravelers.push(trip) : null
