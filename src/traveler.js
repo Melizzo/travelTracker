@@ -96,14 +96,36 @@ class Traveler {
     return flightCosts;
   }
 
+  calculateTotalCostOfAllTrips() {
+    const travelersTrips = this.findTravelerTrips();
+    const result = travelersTrips.reduce(
+      (totalCosts, trip) => {
+        this.destinationsData.forEach((destination) => {
+          if (
+            trip.destinationID === destination.id 
+          ) {
+            const totalLodging = trip.travelers * destination.estimatedLodgingCostPerDay
+            const totalFlights = (trip.travelers * destination.estimatedFlightCostPerPerson)
+            totalCosts += (totalLodging + totalFlights) * trip.duration;
+          }
+        });
+        return totalCosts;
+      },
+      0
+    );
+    return result;
+  }
+
   calculateTotalCostOfTrips(array1, array2) {
     const totalCostOfTrips = array1 + array2;
-    return totalCostOfTrips;
+    return totalCostOfTrips
   }
 
   calculateTravelAgency10PercentFee(num) {
     return 0.1 * num;
   }
+
+  
 }
 
 export default Traveler;

@@ -106,22 +106,19 @@ document.addEventListener("click", (e) => {
       })
       .catch((err) => {
         console.log(err);
+        document.getElementById("travel-agency-delete-trip").requestFullscreen();
         alert("Error - trip id not found!");
       });
   }
   if (e.target.id === 'search-for-traveler') {
     let name = document.getElementById('search-traveler-name-travel-agent').value
     const searchedtraveler = travelAgent.findSingleTraveler(name)
-    traveler = new Traveler({"id": searchedtraveler.id,
-    "name": searchedtraveler.name,
+    traveler = new Traveler({"id": searchedtraveler.travelerFound.id,
+    "name": searchedtraveler.travelerFound.name,
     "travelerType": "relaxer" },
       searchedtraveler.tripsData, 
       searchedtraveler.destinationData 
     )
-    
-    // traveler.tripsData = traveler.findTravelerTrips();
-    console.log(traveler);
-    
     domUpdates.displaySearchedTraveler(traveler)
   }
 });

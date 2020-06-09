@@ -4,7 +4,6 @@ import moment from 'moment';
 class TravelAgency extends Traveler {
   constructor(travelerData, tripsData, destinationsData, travelersData) {
     super(travelerData, tripsData, destinationsData); 
-    // this.travelerData = []
     this.travelersData = this.checkIfDataIsArray(travelersData)
     this.todaysDate = moment().format('YYYY/MM/DD')
   }
