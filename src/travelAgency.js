@@ -54,9 +54,25 @@ class TravelAgency extends Traveler {
     if(!travelerFound) {
       alert('Traveler not found!')
     }
-    console.log(travelerFound);
-    
-    return travelerFound
+    const tripsData = this.tripsData.filter((trip) => {
+      if (trip.userID === travelerFound.id) {
+        return trip;
+      }
+    });
+
+    const destinationData = this.destinationsData.reduce((acc, destination) => {
+      tripsData.forEach((trip) => {
+        if (
+          destination.id === trip.destinationID &&
+          !acc.includes(destination)
+        ) {
+          acc.push(destination);
+        }
+      });
+      return acc;
+    }, []);
+    return {travelerFound, tripsData, destinationData}
+
   }
 }
 

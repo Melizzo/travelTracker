@@ -111,11 +111,18 @@ document.addEventListener("click", (e) => {
   }
   if (e.target.id === 'search-for-traveler') {
     let name = document.getElementById('search-traveler-name-travel-agent').value
-    name = travelAgent.findSingleTraveler(name)
-    traveler = fetchSingleUser(name.id)
+    const searchedtraveler = travelAgent.findSingleTraveler(name)
+    traveler = new Traveler({"id": searchedtraveler.id,
+    "name": searchedtraveler.name,
+    "travelerType": "relaxer" },
+      searchedtraveler.tripsData, 
+      searchedtraveler.destinationData 
+    )
+    
+    // traveler.tripsData = traveler.findTravelerTrips();
     console.log(traveler);
-    // promise {pending}
-    domUpdates.displaySearchedTraveler(name)
+    
+    domUpdates.displaySearchedTraveler(traveler)
   }
 });
 

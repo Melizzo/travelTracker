@@ -60,8 +60,7 @@ let domUpdates = {
   },
   
   displaySearchedTraveler(traveler) {
-    const firstName = traveler.findTravelerFirstName()
-    console.log(firstName);
+    console.log(traveler);
   },
   // searchTravelers(name) {
   //   const foundTraveler = travelAgent.findSingleTraveler(name);
@@ -78,7 +77,7 @@ let domUpdates = {
         
 
   //   // console.log('SearchedTravelerData', this.travelerData);
-  //   // this.tripsData = this.findTravelerTrips()
+  //   // this.tripsData = traveler.findTravelerTrips()
   //   // console.log(this.findTravelerTrips());
   //   // const totalLodgingCost = this.calculateTotalLodgingCost()
   //   // console.log('single traveler lodging', this.calculateTotalLodgingCost());
@@ -149,7 +148,8 @@ let domUpdates = {
             "beforeend",
             `<p>Location: ${destination.destination}<p>
           <p>Total Travelers: ${trip.travelers}<p>
-          <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>`
+          <p>Travel date: ${trip.date}, and lasted for ${trip.duration} days!<p>
+          <img id="destination-image" src="${destination.image}" alt="${destination.alt}">`
           );
         }
       });
