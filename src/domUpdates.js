@@ -18,16 +18,96 @@ let domUpdates = {
       travelerPage.classList.add("traveler-login-page");
     }
   },
+
+  // TravelAgency
   displayTravelAgentInformation(travelAgent) {
-    console.log(`This is the page for the Travel Agent`);
+    this.displayAllPendingTravelersTrip(travelAgent)
+    this.displayIncomeFor2020(travelAgent)
+    this.displayCurrentTravelersOnATrip(travelAgent)
   },
 
+  displayCurrentTravelersOnATrip(travelAgent) {
+    const travelersOnTrip = travelAgent.findTotalNumTravelersCurrentlyOnATrip()
+    document.getElementById('travel-agency-Header').insertAdjacentHTML('beforeend', `<h3>${travelersOnTrip} travelers are currently traveling.</h3>`)
+  },
+
+  displayIncomeFor2020(travelAgent) {
+    const totalFlightsCost2020 = travelAgent.calculateTotalFlightsCost()
+    const totalLodgingCost2020 = travelAgent.calculateTotalLodgingCost()
+    const income = travelAgent.calculateTotalCostOfTrips(totalFlightsCost2020, totalLodgingCost2020)
+    document.getElementById('travel-agency-Header').insertAdjacentHTML('afterbegin', `<h3>2020 Income: $${income}</h3>`)
+  },
+  
+  displayAllPendingTravelersTrip(travelAgent){
+    const pendingTrips = travelAgent.findAllPendingTrips()
+    const destinations = travelAgent.destinationsData
+    if(pendingTrips.length === 0){
+      document.getElementById('travel-agency-all-pending-trips').insertAdjacentHTML(
+        "afterbegin", `<p>There are no pending trips that need approved!</p>`) 
+    } 
+    else {
+      pendingTrips.forEach(trip => {
+        destinations.forEach(destination => {
+          if(trip.destinationID === destination.id) {
+            document.getElementById('travel-agency-all-pending-trips').insertAdjacentHTML(
+              "beforeend", `<p>Trip Booking id: ${trip.id} for Traveler id: ${trip.userID} </p>
+              <p>Location: ${destination.destination}</p><p>Total Travelers: ${trip.travelers}<p>
+              <p>Trip starts: ${trip.date}, for ${trip.duration} days.<p>`) 
+          }
+        })
+      })
+    } 
+  },
+  
+  displaySearchedTraveler(traveler) {
+    const firstName = traveler.findTravelerFirstName()
+    console.log(firstName);
+  },
+  // searchTravelers(name) {
+  //   const foundTraveler = travelAgent.findSingleTraveler(name);
+  //   // use the found the traveler to get each piece of the data
+  //   // instaniate the new traveler
+  //   this.travelerData = [foundTraveler]
+  //   console.log(foundTraveler);
+  
+  //   const newTraveller = new Traveler(foundTraveler.travelerData, foundTraveler.tripsData, foundTraveler.destinationsData);
+  //   console.log(newTraveller);
+    
+        // have different functions to find the data for each traveler, ie find trips,
+        // those functions would go in as arguments into the new traveler instanitation
+        
+
+  //   // console.log('SearchedTravelerData', this.travelerData);
+  //   // this.tripsData = this.findTravelerTrips()
+  //   // console.log(this.findTravelerTrips());
+  //   // const totalLodgingCost = this.calculateTotalLodgingCost()
+  //   // console.log('single traveler lodging', this.calculateTotalLodgingCost());
+  //   // const totalFlightCost = this.calculateTotalFlightsCost()
+  //   // console.log('single traveler flights', this.calculateTotalFlightsCost());
+  //   // const totalCost = this.calculateTotalCostOfTrips(totalLodgingCost, totalFlightCost)
+  //   // console.log('total cost', this.calculateTotalCostOfTrips(totalLodgingCost, totalFlightCost));
+  //   // const agencyCut = this.calculateTravelAgency10PercentFee(totalCost)
+  //   // console.log(agencyCut);
+    
+  //   // const totalTravelerData = [...this.travelerData,...this.tripsData]
+  //   // console.log(totalTravelerData);
+  // }
+
+// Traveler
   displayBookTripForm() {
     document.getElementById("book-traveler-trip").classList.remove("hidden");
     document.getElementById("show-traveler-trip").classList.add("hidden");
   },
 
+  validateDestinationID(){
+    const destinationID = +document.getElementById('destination-Form-ID').value
+    if((destinationID < 1 || destinationID >50) && destinationID === Nan) {
+      document.getElementById('destination-Form-ID').insertAdjacentHTML('beforebegin', `<p>That is an incorrect destination id, try again.</p>`)
+    }
+  },
+
   displayTentativeTrip(trip, destinationsData) {
+    document.getElementById('destination-Form-ID').addEventListener('keyup', this.validateDestinationID)
     const destination = destinationsData.find(
       (destination) => destination.id === trip.destinationID
     );

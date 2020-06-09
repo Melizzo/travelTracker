@@ -12,7 +12,8 @@ class TravelAgency extends Traveler {
   calculateTotalLodgingCost() {
     return this.tripsData.reduce((totalLodging, trip) => {
       this.destinationsData.forEach(destination => {
-        if(trip.destinationID === destination.id) {
+        if(trip.destinationID === destination.id &&
+          Number(trip.date.split("/")[0]) > 2019) {
           totalLodging += trip.duration * destination.estimatedLodgingCostPerDay
         } 
       })
@@ -23,15 +24,16 @@ class TravelAgency extends Traveler {
   calculateTotalFlightsCost() {
     return this.tripsData.reduce((totalFlights, trip) => {
       this.destinationsData.forEach(destination => {
-        if(trip.destinationID === destination.id) {
+        if(trip.destinationID === destination.id &&
+          Number(trip.date.split("/")[0]) > 2019) {
           totalFlights += trip.duration * destination.estimatedFlightCostPerPerson
         } 
       })
       return totalFlights
     }, 0)
   }
-
-  findPendingTrips() {
+  
+  findAllPendingTrips() {
     return this.tripsData.filter(trip => trip.status === 'pending');
   }
 
@@ -46,39 +48,15 @@ class TravelAgency extends Traveler {
     return travelers.length
   }
 
-  // searchTravelers(name) {
-  //   const foundTraveler = travelAgent.findSingleTraveler(name);
-  //   // use the found the traveler to get each piece of the data
-  //   // instaniate the new traveler
-  //   this.travelerData = [foundTraveler]
-  //   console.log(foundTraveler);
-  
-  //   const newTraveller = new Traveler(foundTraveler.travelerData, foundTraveler.tripsData, foundTraveler.destinationsData);
-  //   console.log(newTraveller);
-    
-        // have different functions to find the data for each traveler, ie find trips,
-        // those functions would go in as arguments into the new traveler instanitation
-        
-
-  //   // console.log('SearchedTravelerData', this.travelerData);
-  //   // this.tripsData = this.findTravelerTrips()
-  //   // console.log(this.findTravelerTrips());
-  //   // const totalLodgingCost = this.calculateTotalLodgingCost()
-  //   // console.log('single traveler lodging', this.calculateTotalLodgingCost());
-  //   // const totalFlightCost = this.calculateTotalFlightsCost()
-  //   // console.log('single traveler flights', this.calculateTotalFlightsCost());
-  //   // const totalCost = this.calculateTotalCostOfTrips(totalLodgingCost, totalFlightCost)
-  //   // console.log('total cost', this.calculateTotalCostOfTrips(totalLodgingCost, totalFlightCost));
-  //   // const agencyCut = this.calculateTravelAgency10PercentFee(totalCost)
-  //   // console.log(agencyCut);
-    
-  //   // const totalTravelerData = [...this.travelerData,...this.tripsData]
-  //   // console.log(totalTravelerData);
-  // }
-
   findSingleTraveler(name) {
     const lowerCaseName = name.toLowerCase()
-    return this.travelersData.find(traveler => traveler.name.toLowerCase().includes(lowerCaseName))
+    const travelerFound = this.travelersData.find(traveler => traveler.name.toLowerCase().includes(lowerCaseName))
+    if(!travelerFound) {
+      alert('Traveler not found!')
+    }
+    console.log(travelerFound);
+    
+    return travelerFound
   }
 }
 

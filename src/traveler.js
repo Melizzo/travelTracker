@@ -30,7 +30,6 @@ class Traveler {
         return trip;
       }
     });
-    // domUpdates.displayTravelerTrips(singleTravelerTrips, this.destinationsData)
     return singleTravelerTrips;
   }
 
@@ -94,13 +93,11 @@ class Traveler {
       },
       0
     );
-    // domUpdates.displaySingleFlightCosts(flightCosts)
     return flightCosts;
   }
 
   calculateTotalCostOfTrips(array1, array2) {
     const totalCostOfTrips = array1 + array2;
-    // domUpdates.displayTotalCostOfTrips(totalCostOfTrips);
     return totalCostOfTrips;
   }
 
