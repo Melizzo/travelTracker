@@ -43,7 +43,8 @@ To verify that it is setup correctly, run `npm start` in your terminal. Go to `h
 6. 100% ARIA Audit
 7. Inhertiance from Traveler to Travel Agent
 7. SRP and DRY code
-8. Create a DomUpdates file to handle dom changes
+8. Create a DomUpdates class to handle dom changes
+9. Create a API class to handle all Fetch requests
 9. Work remotely to ensure a successful project. 
 
 
