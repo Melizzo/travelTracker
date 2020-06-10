@@ -3,7 +3,6 @@ const expect = chai.expect;
 
 import TravelAgency from '../src/travelAgency.js'
 import travelersData from './travelersData-test.js'
-// import Traveler from '../src/traveler.js'
 import travelerData from './traveler-data-test.js'
 import tripsData from './tripsData-test.js';
 import destinationsData from './destinationData-test.js'
@@ -39,11 +38,11 @@ describe('TravelAgency', function() {
   });
 
   it('should have a method to find the total cost of lodging for all travelers', function() {
-    expect(travelAgent.calculateTotalLodgingCost()).to.equal(7620)
+    expect(travelAgent.calculateTotalLodgingCost()).to.equal(5860)
   });
 
   it('should have a method to find the total cost of flights for all travelers', function() {
-    expect(travelAgent.calculateTotalFlightsCost()).to.equal(47290)
+    expect(travelAgent.calculateTotalFlightsCost()).to.equal(38890)
   });
 
   it('should have a method to find the total cost of every trip', function() {
@@ -55,25 +54,16 @@ describe('TravelAgency', function() {
   });
 
   it('should be able to find all pending Trips', function() {
-    expect(travelAgent.findPendingTrips()).to.deep.equal([{
-      "id": 2,
-      "userID": 3,
-      "destinationID": 2,
-      "travelers": 5,
-      "date": "2020/10/04",
-      "duration": 18,
-      "status": "pending",
-      "suggestedActivities": []
-      },
+    expect(travelAgent.findPendingTrips()).to.deep.equal([
       {
-      "id": 3,
-      "userID": 2,
-      "destinationID": 3,
-      "travelers": 4,
-      "date": "2020/05/22",
-      "duration": 17,
-      "status": "pending",
-      "suggestedActivities": []
+       "date": "2019/06/15",
+       "destinationID": 5,
+       "duration": 8,
+       "id": 1,
+       "status": "pending",
+       "suggestedActivities": [],
+       "travelers": 1,
+       "userID": 1
       }
     ])
   });
@@ -83,16 +73,34 @@ describe('TravelAgency', function() {
   });
 
   it('should be able abe to find a traveler by name', function() {
-    expect(travelAgent.findSingleTraveler('Tiffy')).to.deep.equal({ 
-      id: 5, 
-      name: 'Tiffy Grout', 
-      travelerType: 'thrill-seeker' 
+    expect(travelAgent.findSingleTravelerInformation('Tiffy')).to.deep.equal({ 
+     "destinationData": [
+        {
+          "alt": "overview of city buildings with a clear sky",
+          "destination": "Lima, Peru",
+          "estimatedFlightCostPerPerson": 400,
+          "estimatedLodgingCostPerDay": 70,
+          "id": 1,
+          "image": "https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80"
+        }
+      ],
+      "travelerFound": {
+        "id": 5,
+        "name": "Tiffy Grout",
+        "travelerType": "thrill-seeker",
+      },
+      "tripsData": [
+        {
+          "date": "2019/09/16",
+          "destinationID": 1,
+          "duration": 8,
+          "id": 1,
+          "status": "approved",
+          "suggestedActivities": [],
+          "travelers": 1,
+          "userID": 5
+        }
+      ]
     })
   });
-
-  // it('should be able able to find a traveler', function() {
-  //   console.log(travelAgent.searchTravelers('Tiffy'));
-  //   expect(travelAgent.searchTravelers('Tiffy')).to.equal([])
-  // });
-
 })

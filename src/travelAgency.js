@@ -47,7 +47,7 @@ class TravelAgency extends Traveler {
     return travelers.length
   }
 
-  findSingleTraveler(name) {
+  findSingleTravelerInformation(name) {
     const lowerCaseName = name.toLowerCase()
     const travelerFound = this.travelersData.find(traveler => traveler.name.toLowerCase().includes(lowerCaseName))
     if(!travelerFound) {
@@ -58,7 +58,6 @@ class TravelAgency extends Traveler {
         return trip;
       }
     });
-
     const destinationData = this.destinationsData.reduce((acc, destination) => {
       tripsData.forEach((trip) => {
         if (
@@ -71,7 +70,6 @@ class TravelAgency extends Traveler {
       return acc;
     }, []);
     return {travelerFound, tripsData, destinationData}
-
   }
 }
 

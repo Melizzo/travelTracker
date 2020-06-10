@@ -62,7 +62,7 @@ let domUpdates = {
   displaySearchedTraveler(traveler, travelAgent) {
     document.getElementById(
       "display-found-traveler"
-    ).insertAdjacentHTML('afterbegin',`<h3>Traveler: ${traveler.travelerData.name}</h3>`;
+    ).insertAdjacentHTML('afterbegin',`<h3>Traveler: ${traveler.travelerData.name}</h3>`)
     const totalCost = traveler.calculateTotalCostOfAllTrips(traveler)
     const agentCut = traveler.calculateTravelAgency10PercentFee(totalCost)
     document.getElementById(

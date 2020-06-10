@@ -129,12 +129,23 @@ let traveler;
     expect(traveler.calculateTotalFlightCostPerTripThisYear(traveler.findTravelerTrips())).to.equal(1350)
   })
 
-  it('should be able to total the cost of all the traveler\'s trip', function() {
+  it('should be able to total the cost of all the traveler\'s trip for 2020', function() {
     expect(traveler.calculateTotalCostOfTrips(traveler.calculateTotalFlightCostPerTripThisYear(), traveler.calculateTotalLodgingCostPerTripThisYear())).to.equal(3200)
+  })
+
+  it('should return an error if a number is not used', function() {
+    expect(traveler.calculateTotalCostOfTrips('horse', [4000])).to.equal(`something is a amiss with the arguments`)
+  })
+
+  it('should be able to calculate the total cost of all trips', function() {
+    expect(traveler.calculateTotalCostOfAllTrips()).to.equal(21100)
   })
 
   it('should be able to show the 10% Travel Agency fees', function() {
     expect(traveler.calculateTravelAgency10PercentFee(3200)).to.equal(320)
   })
 
+  it('should return an error if a number is not used', function() {
+    expect(traveler.calculateTravelAgency10PercentFee('Hello')).to.equal('Hello is not a number')
+  })
 })
