@@ -118,11 +118,18 @@ class Traveler {
 
   calculateTotalCostOfTrips(array1, array2) {
     const totalCostOfTrips = array1 + array2;
+    if(isNaN(totalCostOfTrips)) {
+      return `something is a amiss with the arguments`
+    }
     return totalCostOfTrips
   }
 
   calculateTravelAgency10PercentFee(num) {
-    return 0.1 * num;
+    const agencyCut = 0.1 * num;
+    if(!agencyCut) {
+      return `${num} is not a number`
+    }
+    return agencyCut
   }
 
   
