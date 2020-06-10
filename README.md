@@ -45,7 +45,7 @@ To verify that it is setup correctly, run `npm start` in your terminal. Go to `h
 7. SRP and DRY code
 8. Create a DomUpdates class to handle dom changes
 9. Create a API class to handle all Fetch requests
-9. Work remotely to ensure a successful project. 
+10. Work remotely to ensure a successful project. 
 
 
 ## Contributor
