@@ -1,12 +1,13 @@
 # Travel Tracker
 
 Final Mod 2 Solo project - To complete a travel agency with a traveler login and manager login. 
+
 The details of this project are outlined in [this project spec](https://frontend.turing.io/projects/travel-tracker.html).
 
 
 ## Setup
 
-## Clone This Repo
+### Clone This Repo
 
 That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
 
@@ -17,8 +18,6 @@ That's right, _clone_ not fork. You will use this repo multiple times, but you c
 1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
 
 Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
-
-## Setup
 
 Then install the library dependencies. Run:
 
@@ -48,7 +47,7 @@ To verify that it is setup correctly, run `npm start` in your terminal. Go to `h
 9. Work remotely to ensure a successful project. 
 
 
-## Contributors
+## Contributor
 
 * **[Melissa VanKempen](https://github.com/Melizzo)**
 
