@@ -30,8 +30,8 @@ To verify that it is setup correctly, run `npm start` in your terminal. Go to `h
 ## GIF 
 
 
-  <a href="https://media.giphy.com/media/ii8tXrMqt9oKiQ6JaN/giphy.gif></a>
-
+![Traveler Demo](https://media.giphy.com/media/ii8tXrMqt9oKiQ6JaN/giphy.gif)
+![Manager Demo](https://media.giphy.com/media/j2A0rrAJp9H8rSV41d/giphy.gif)
 
 ## Learning Goals
 
