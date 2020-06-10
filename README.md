@@ -30,7 +30,7 @@ To verify that it is setup correctly, run `npm start` in your terminal. Go to `h
 ## GIF 
 
 
-  <a href="https://media.giphy.com/media/ii8tXrMqt9oKiQ6JaN/giphy.gif><img          src="https://media.giphy.com/media/UsNRN8mk8JHxjEW7Re/giphy.gif"/></a>
+  <a href="https://media.giphy.com/media/ii8tXrMqt9oKiQ6JaN/giphy.gif></a>
 
 
 ## Learning Goals
